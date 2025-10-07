@@ -1,18 +1,57 @@
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom"
+import Home from "./pages/Home/Home"
+import Login from "./pages/Login/Login"
+import Cart from "./pages/Cart/Cart"
+import { useEffect, useState } from "react"
+import type { Product } from "./types/Product"
+import { supabase } from "./api/supabaseClient"
+
 function App() {
+    const [products, setProducts] = useState<Product[]>([])
+
+    useEffect(() => {
+        fetchProducts()
+    }, [])
+
+    async function fetchProducts(): Promise<void> {
+        const { data, error } = await supabase.from("products").select()
+        console.log("Supabase data:", data)
+        if (error) {
+            console.error("Error fetching products:", error)
+            setProducts([])
+        } else if (data) {
+            setProducts(data)
+        }
+    }
+
     return (
-        <>
-            <div className="flex min-h-screen items-center justify-center bg-slate-800 text-white">
-                <h1 className="text-4xl font-bold">Tailwind is working!</h1>
-            </div>
-            <div className="bg-bg-light shadow-elevation1 rounded-xl p-4 hover:shadow-elevation2 transition-shadow">
-                <img src="/shoe.jpg" alt="Sneaker" className="rounded-md mb-3" />
-                <h3 className="text-lg font-semibold text-text">AirLite Runner</h3>
-                <p className="text-textMuted text-sm mb-2">$129.99</p>
-                <button className="bg-primary text-white py-2 px-4 rounded-md hover:brightness-110">
-                    Add to Cart
-                </button>
-            </div>
-        </>
+        <BrowserRouter>
+            <nav>
+                <Link to="/">Home</Link>
+                <Link to="/login">Login</Link>
+                <Link to="/cart">Cart</Link>
+                <Link to="/products">Products</Link>
+            </nav>
+
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route
+                    path="/products"
+                    element={
+                        <>
+                            <h1>This is the Products page</h1>
+                            <div>
+                                {products.map((product) => (
+                                    <div key={product.id}>{product.name}</div>
+                                ))}
+                            </div>
+                        </>
+                    }
+                />
+            </Routes>
+        </BrowserRouter>
     )
 }
 
