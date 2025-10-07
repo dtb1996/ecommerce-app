@@ -1,42 +1,51 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* === CSS RESET === */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    min-height: 100vh;
+    font-family: var(--ff);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.5;
+}
+
+/* === GLOBAL VARIABLES === */
 
 /* LIGHT THEME */
 :root {
-    /* Base surfaces */
     --color-bg-dark: hsl(220, 14%, 90%);
     --color-bg: hsl(220, 14%, 96%);
     --color-bg-light: hsl(0, 0%, 100%);
     --color-bg-highlight: hsl(200, 100%, 97%);
     --color-input-bg: hsl(0, 0%, 100%);
 
-    /* Text colors */
     --color-text: hsl(220, 13%, 10%);
     --color-text-muted: hsl(220, 10%, 45%);
 
-    /* Brand and accents */
     --color-primary: hsl(210, 90%, 45%);
     --color-accent: hsl(180, 90%, 35%);
     --color-sale: hsl(5, 90%, 55%);
 
-    /* Feedback colors */
     --color-success: hsl(145, 60%, 45%);
     --color-error: hsl(0, 80%, 55%);
     --color-warning: hsl(40, 90%, 50%);
 
-    /* Borders & shadows */
     --color-border: hsl(220, 14%, 85%);
     --shadow-elevation-1: 0 1px 3px hsla(0, 0%, 0%, 0.1);
     --shadow-elevation-2: 0 4px 6px hsla(0, 0%, 0%, 0.1);
 
-    /* Font */
     --ff: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
-
-    color-scheme: light;
-    font-family: var(--ff);
-    background-color: var(--color-bg);
-    color: var(--color-text);
 }
 
 /* DARK THEME */
@@ -61,10 +70,51 @@
     --color-border: hsl(240, 10%, 30%);
     --shadow-elevation-1: 0 1px 3px hsla(0, 0%, 0%, 0.5);
     --shadow-elevation-2: 0 4px 6px hsla(0, 0%, 0%, 0.6);
+}
 
-    color-scheme: dark;
-    background-color: var(--color-bg);
-    color: var(--color-text);
+/* === BASIC ELEMENT STYLES === */
+a,
+button,
+select {
+    cursor: pointer;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+/* === UTILITY CLASSES === */
+.text-center {
+    text-align: center;
+}
+
+.shadow-1 {
+    box-shadow: var(--shadow-elevation-1);
+}
+
+.shadow-2 {
+    box-shadow: var(--shadow-elevation-2);
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.muted {
+    color: var(--color-text-muted);
 }
 
 /* Accessibility: Reduce animation if needed */
