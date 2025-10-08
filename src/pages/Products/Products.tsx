@@ -2,6 +2,7 @@ import { supabase } from "@/api/supabaseClient"
 import { ProductCard } from "@/components/ProductCard/ProductCard"
 import type { Product } from "@/types/Product"
 import { useEffect, useState } from "react"
+import styles from "./Products.module.scss"
 
 export default function Products() {
     const [products, setProducts] = useState<Product[]>([])
@@ -24,9 +25,8 @@ export default function Products() {
     return (
         <>
             <h1>This is the Products page</h1>
-            <div>
+            <div className={styles.productsContainer}>
                 {products.map((product) => (
-                    // <div key={product.id}>{product.name}</div>
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>

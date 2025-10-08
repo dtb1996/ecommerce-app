@@ -15,6 +15,7 @@ const categories = [
 
 const getImageUrl = (keyword: string) =>
     `https://source.unsplash.com/400x400/?${encodeURIComponent(keyword)}`
+// `https://loremflickr.com/400/400/${encodeURIComponent(keyword)}`
 
 function generateProduct() {
     const category = faker.helpers.arrayElement(categories)

@@ -1,0 +1,50 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    text-align: center;
+    background: var(--color-bg-light);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+    img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    h3 {
+        font-size: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    p {
+        font-weight: 500;
+        color: var(--color-text-muted);
+        margin-bottom: 0.75rem;
+    }
+
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &:visited {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    &:hover,
+    &:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-elevation-1);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--accent-color, #0070f3);
+        outline-offset: 2px;
+    }
+}

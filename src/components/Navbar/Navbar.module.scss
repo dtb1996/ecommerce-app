@@ -4,4 +4,17 @@ nav {
     box-shadow: var(--shadow-elevation-1);
     padding: 1rem 2rem;
     gap: 1.5rem;
+
+    a {
+        font-weight: 600;
+
+        &,
+        &:hover,
+        &:focus,
+        &:active,
+        &:visited {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
 }

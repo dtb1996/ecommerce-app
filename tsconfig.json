@@ -3,6 +3,9 @@
     "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
     "compilerOptions": {
         "baseUrl": ".",
+        "module": "ESNext",
+        "target": "ES2022",
+        "moduleResolution": "Bundler",
         "paths": {
             "@/*": ["./src/*"],
             "@components/*": ["./src/components/*"],
