@@ -7,6 +7,7 @@ const HomePage = lazy(() => import("@/pages/Home/Home"))
 const LoginPage = lazy(() => import("@/pages/Login/Login"))
 const CartPage = lazy(() => import("@/pages/Cart/Cart"))
 const ProductsPage = lazy(() => import("@/pages/Products/Products"))
+const ProductDetailsPage = lazy(() => import("@/pages/ProductDetails/ProductDetails"))
 
 export default function AppRouter() {
     return (
@@ -25,6 +26,7 @@ export default function AppRouter() {
                             }
                         />
                         <Route path="/products" element={<ProductsPage />} />
+                        <Route path="/products/:id" element={<ProductDetailsPage />} />
                     </Route>
 
                     {/* Todo: Add route for invalid paths */}

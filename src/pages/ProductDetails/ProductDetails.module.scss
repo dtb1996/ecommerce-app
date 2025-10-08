@@ -1,0 +1,28 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .details {
+        display: flex;
+        gap: 2rem;
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+    }
+
+    a {
+        &,
+        &:hover,
+        &:focus,
+        &:active,
+        &:visited {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+}

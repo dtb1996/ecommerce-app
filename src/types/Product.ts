@@ -5,5 +5,5 @@ export interface Product {
     price: number
     image_url: string
     category: string
-    stock?: number
+    in_stock: boolean
 }
