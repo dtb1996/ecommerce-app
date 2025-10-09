@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/api/supabaseClient"
 import placeholder from "@assets/images/placeholder.svg"
 import type { Product } from "@/types/Product"
+import QuantitySelector from "@/components/common/QuantitySelector/QuantitySelector"
+import { Button } from "@/components/common/Button/Button"
 
 export default function ProductDetails() {
     const { id } = useParams()
@@ -35,8 +37,8 @@ export default function ProductDetails() {
                     <h1>{product.name}</h1>
                     <p className={styles.price}>${product.price.toFixed(2)}</p>
                     <p>{product.description}</p>
-                    <button>Add to Cart</button>
-                    {/* TODO: add quantity selector */}
+                    <QuantitySelector initialQuantity={1} />
+                    <Button children={"Add to Cart"} />
                     <p>Category: {product.category}</p>
                 </div>
             </div>
