@@ -1,73 +1,135 @@
-# React + TypeScript + Vite
+# E-Commerce Storefront
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, full-stack-ready **React + TypeScript** storefront application built for scalability and maintainability. It includes a modular component system, SCSS styling, and environment variable management using both **local `.env` files** and **Infisical** for secure, cloud-stored secrets.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 18 + TypeScript** — strict typing and component safety
+- **SCSS Modules** — locally scoped, themeable styles
+- **Modular UI components** — reusable `Button`, `QuantitySelector`, and layout primitives
+- **Environment Config with Infisical** — secure, centralized secret management
+- **Vite Dev Server** — fast builds and hot module reloading
 
-## React Compiler
+## Project Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-    globalIgnores(["dist"]),
-    {
-        files: ["**/*.{ts,tsx}"],
-        extends: [
-            // Other configs...
-
-            // Remove tseslint.configs.recommended and replace with this
-            tseslint.configs.recommendedTypeChecked,
-            // Alternatively, use this for stricter rules
-            tseslint.configs.strictTypeChecked,
-            // Optionally, add this for stylistic rules
-            tseslint.configs.stylisticTypeChecked,
-
-            // Other configs...
-        ],
-        languageOptions: {
-            parserOptions: {
-                project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-                tsconfigRootDir: import.meta.dirname,
-            },
-            // other options...
-        },
-    },
-])
+```bash
+ecommerce-storefront/
+│
+├── src/
+│   ├── components/ # Reusable UI components
+│   ├── pages/      # Page-level views
+│   ├── hooks/      # Custom React hooks
+│   ├── assets/     # Images, fonts, and icons
+│   ├── styles/     # Global and SCSS module files
+│   └── main.tsx    # App entry point
+│
+├── .env            # Local development environment variables
+├── .env.example    # Example variable names
+├── infisical.json  # Optional: Infisical project configuration
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Environment Setup
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x"
-import reactDom from "eslint-plugin-react-dom"
+You can configure environment variables in two ways — locally or via Infisical Cloud Secrets.
 
-export default defineConfig([
-    globalIgnores(["dist"]),
-    {
-        files: ["**/*.{ts,tsx}"],
-        extends: [
-            // Other configs...
-            // Enable lint rules for React
-            reactX.configs["recommended-typescript"],
-            // Enable lint rules for React DOM
-            reactDom.configs.recommended,
-        ],
-        languageOptions: {
-            parserOptions: {
-                project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-                tsconfigRootDir: import.meta.dirname,
-            },
-            // other options...
-        },
-    },
-])
+### Option 1: Local `.env` File
+
+Copy the example file and add your local keys:
+
+`cp .env.example .env`
+
+Edit `.env`:
+
+```bash
+VITE_SUPABASE_URL=<supabase-url-here>
+VITE_SUPABASE_KEY=<supabase-auth-key-here>
+SUPABASE_SERVICE_KEY=<supabase-service-key-here>
 ```
+
+**Note:** Only variables prefixed with `VITE_` are exposed to your frontend when using Vite.
+
+### Option 2: Using Infisical (Recommended)
+
+Infisical allows you to securely store and sync environment variables across devices and environments.
+
+#### 1. Install Infisical CLI
+
+`npm install -g infisical`
+
+#### 2. Login and Link Your Project
+
+```bash
+infisical login
+infisical init
+```
+
+This creates an `infisical.json` file in your project root.
+
+#### 3. Pull Environment Variables
+
+For development:
+
+`infisical run --env=dev -- npm run dev`
+
+For production:
+
+`infisical run --env=prod -- npm run build`
+
+`infisical run` automatically injects your remote secrets into the runtime environment.
+
+## Development
+
+Run the local dev server:
+
+`npm run dev`
+
+Lint and format code:
+
+```bash
+npm run lint
+npm run format
+```
+
+Build for production:
+
+`npm run build`
+
+Preview production build locally:
+
+`npm run preview`
+
+## Common Issues
+
+**1. Missing `.env` variables**  
+Ensure `.env` or Infisical keys are available before running `npm run dev`.
+
+**2. TypeScript error for custom components**  
+Make sure component prop types extend native HTML attributes, for example:
+
+`type  ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: string
+};`
+
+**3. Styles not applying**  
+Check that SCSS modules are imported correctly:
+
+`import styles from  "./Button.module.scss"`
+
+## Tech Stack
+
+- **Front End:** [React](https://react.dev/), [React Router](https://reactrouter.com/), [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [SCSS Modules](https://sass-lang.com/), CSS Variables
+- **State Management:** React Context API for cart and UI state
+- **API / Backend:** [Supabase](https://supabase.com/) for database and authentication
+- **Utilities:** [Faker](https://fakerjs.dev/) for seeding mock data, [clsx](https://github.com/lukeed/clsx) for className management
+- **Linting & Formatting:** [ESLint](https://eslint.org/), [Prettier](https://prettier.io/)
+- **CI/CD:** [GitHub Actions](https://github.com/features/actions), [Netlify](https://www.netlify.com/) for hosting
+- **Image Handling:** [Unsplash](https://unsplash.com/) or [LoremFlickr](https://loremflickr.com/) for placeholder images
+
+## License
+
+This project is licensed under the **MIT License**.  
+Feel free to modify and use it in your own projects.
