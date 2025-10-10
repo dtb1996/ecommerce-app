@@ -5,6 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
+        "dev:secrets": "node src/scripts/dev.js",
         "build": "tsc -b && vite build",
         "lint": "eslint .",
         "format": "prettier --write .",
@@ -22,7 +23,8 @@
     "devDependencies": {
         "@eslint/js": "^9.36.0",
         "@faker-js/faker": "^10.0.0",
-        "@types/node": "^24.7.0",
+        "@infisical/cli": "^0.43.3",
+        "@types/node": "^24.7.1",
         "@types/react": "^19.1.16",
         "@types/react-dom": "^19.1.9",
         "@vitejs/plugin-react": "^5.0.4",
