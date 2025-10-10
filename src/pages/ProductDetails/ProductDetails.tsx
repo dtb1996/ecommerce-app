@@ -43,6 +43,7 @@ export default function ProductDetails() {
                 </div>
             </div>
             <Link to="/products">Back to Products</Link>
+            <Button style={{ width: "400px", padding: "0.75rem 1rem" }} children={"Add to Cart"} />
         </div>
     ) : (
         <p>Loading...</p>
