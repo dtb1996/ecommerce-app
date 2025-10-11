@@ -1,3 +1,19 @@
+import { useCart } from "@/context/CartContext"
+
 export default function Cart() {
-    return <h1>This is the Cart component</h1>
+    const { cartItems } = useCart()
+
+    return (
+        <>
+            <h1>Cart Items</h1>
+            <div>
+                {cartItems.map((item) => (
+                    <div key={item.id}>
+                        <h4>{item.name}</h4>
+                        <p>{item.quantity}</p>
+                    </div>
+                ))}
+            </div>
+        </>
+    )
 }

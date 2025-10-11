@@ -6,10 +6,12 @@ import placeholder from "@assets/images/placeholder.svg"
 import type { Product } from "@/types/Product"
 import QuantitySelector from "@/components/common/QuantitySelector/QuantitySelector"
 import { Button } from "@/components/common/Button/Button"
+import { useCart } from "@/context/CartContext"
 
 export default function ProductDetails() {
     const { id } = useParams()
     const [product, setProduct] = useState<Product | null>(null)
+    const { addToCart } = useCart()
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -38,7 +40,7 @@ export default function ProductDetails() {
                     <p className={styles.price}>${product.price.toFixed(2)}</p>
                     <p>{product.description}</p>
                     <QuantitySelector initialQuantity={1} />
-                    <Button children={"Add to Cart"} />
+                    <Button onClick={() => addToCart(product, 1)} children={"Add to Cart"} />
                     <p>Category: {product.category}</p>
                 </div>
             </div>
