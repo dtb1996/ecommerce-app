@@ -24,7 +24,7 @@ export default function Products() {
 
     return (
         <>
-            <h1>This is the Products page</h1>
+            <h1>Products</h1>
             <div className={styles.productsContainer}>
                 {products.map((product) => (
                     <ProductCard key={product.id} product={product} />

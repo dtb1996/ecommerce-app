@@ -10,7 +10,7 @@ export default function QuantitySelector({
     initialQuantity?: number
     min?: number
     max?: number
-    onQuantityChanged?: () => void
+    onQuantityChanged?: (quantity: number) => void
 }) {
     const [quantity, setQuantity] = useState<number>(initialQuantity)
 

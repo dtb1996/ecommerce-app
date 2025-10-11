@@ -1,5 +1,5 @@
 import type { Product } from "@/types/Product"
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react"
 
 type CartItem = Product & { quantity: number }
 
@@ -15,20 +15,33 @@ type CartContextType = {
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
-export const CartProvider = ({ children }: { children: ReactNode }) => {
-    const [cartItems, setCartItems] = useState<CartItem[]>([])
+const STORAGE_KEY = "cart"
 
+export const CartProvider = ({ children }: { children: ReactNode }) => {
     // Load from localStorage
-    useEffect(() => {
-        const stored = localStorage.getItem("cart")
-        if (stored) {
-            setCartItems(JSON.parse(stored))
+    const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+        try {
+            const stored = localStorage.getItem(STORAGE_KEY)
+            return stored ? JSON.parse(stored) : []
+        } catch {
+            return []
         }
+    })
+
+    // Sync cart across multiple tabs
+    useEffect(() => {
+        const handleStorage = (e: StorageEvent) => {
+            if (e.key === STORAGE_KEY && e.newValue) {
+                setCartItems(JSON.parse(e.newValue))
+            }
+        }
+        window.addEventListener("storage", handleStorage)
+        return () => window.removeEventListener("storage", handleStorage)
     }, [])
 
     // Save to localStorage on change
     useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(cartItems))
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(cartItems))
     }, [cartItems])
 
     const addToCart = (product: Product, quantity: number = 1) => {
