@@ -3,11 +3,11 @@ import { lazy, Suspense } from "react"
 import Layout from "@/components/Layout/Layout"
 import ProtectedRoute from "./ProtectedRoute"
 
-const HomePage = lazy(() => import("@/pages/Home/Home"))
-const LoginPage = lazy(() => import("@/pages/Login/Login"))
-const CartPage = lazy(() => import("@/pages/Cart/Cart"))
-const ProductsPage = lazy(() => import("@/pages/Products/Products"))
-const ProductDetailsPage = lazy(() => import("@/pages/ProductDetails/ProductDetails"))
+const HomePage = lazy(() => import("@/pages/HomePage/HomePage"))
+const LoginPage = lazy(() => import("@/pages/LoginPage/LoginPage"))
+const CartPage = lazy(() => import("@/pages/CartPage/CartPage"))
+const ProductsPage = lazy(() => import("@/pages/ProductsPage/ProductsPage"))
+const ProductDetailsPage = lazy(() => import("@/pages/ProductDetailsPage/ProductDetailsPage"))
 
 export default function AppRouter() {
     return (

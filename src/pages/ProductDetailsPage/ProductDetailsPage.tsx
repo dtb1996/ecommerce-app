@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-import styles from "./ProductDetails.module.scss"
+import styles from "./ProductDetailsPage.module.scss"
 import { useEffect, useState } from "react"
 import { supabase } from "@/api/supabaseClient"
 import placeholder from "@assets/images/placeholder.svg"
@@ -8,7 +8,7 @@ import QuantitySelector from "@/components/common/QuantitySelector/QuantitySelec
 import { Button } from "@/components/common/Button/Button"
 import { useCart } from "@/context/CartContext"
 
-export default function ProductDetails() {
+export default function ProductDetailsPage() {
     const { id } = useParams()
     const [product, setProduct] = useState<Product | null>(null)
     const { addToCart } = useCart()

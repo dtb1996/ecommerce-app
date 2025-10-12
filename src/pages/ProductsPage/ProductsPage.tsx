@@ -2,9 +2,9 @@ import { supabase } from "@/api/supabaseClient"
 import { ProductCard } from "@/components/ProductCard/ProductCard"
 import type { Product } from "@/types/Product"
 import { useEffect, useState } from "react"
-import styles from "./Products.module.scss"
+import styles from "./ProductsPage.module.scss"
 
-export default function Products() {
+export default function ProductsPage() {
     const [products, setProducts] = useState<Product[]>([])
 
     useEffect(() => {

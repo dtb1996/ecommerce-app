@@ -2,9 +2,9 @@ import { Button } from "@/components/common/Button/Button"
 import QuantitySelector from "@/components/common/QuantitySelector/QuantitySelector"
 import { useCart } from "@/context/CartContext"
 import { Link } from "react-router-dom"
-import styles from "./Cart.module.scss"
+import styles from "./CartPage.module.scss"
 
-export default function Cart() {
+export default function CartPage() {
     const { cartItems, removeFromCart, updateQuantity, clearCart, totalPrice } = useCart()
 
     const handleClearCart = () => {
