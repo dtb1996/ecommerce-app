@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { lazy, Suspense } from "react"
 import Layout from "@/components/Layout/Layout"
 import ProtectedRoute from "./ProtectedRoute"
@@ -8,6 +8,9 @@ const LoginPage = lazy(() => import("@/pages/LoginPage/LoginPage"))
 const CartPage = lazy(() => import("@/pages/CartPage/CartPage"))
 const ProductsPage = lazy(() => import("@/pages/ProductsPage/ProductsPage"))
 const ProductDetailsPage = lazy(() => import("@/pages/ProductDetailsPage/ProductDetailsPage"))
+const CheckoutPage = lazy(() => import("@/pages/CheckoutPage/CheckoutPage"))
+const ReviewPage = lazy(() => import("@/pages/ReviewPage/ReviewPage"))
+const SuccessPage = lazy(() => import("@/pages/SuccessPage/SuccessPage"))
 
 export default function AppRouter() {
     return (
@@ -27,6 +30,13 @@ export default function AppRouter() {
                         />
                         <Route path="/products" element={<ProductsPage />} />
                         <Route path="/products/:id" element={<ProductDetailsPage />} />
+
+                        {/* Checkout */}
+                        <Route path="/checkout" element={<CheckoutPage />}>
+                            {/* <Route index element={<Navigate to="review" replace />} /> */}
+                            <Route path="review" element={<ReviewPage />} />
+                            <Route path="success" element={<SuccessPage />} />
+                        </Route>
                     </Route>
 
                     {/* Todo: Add route for invalid paths */}
