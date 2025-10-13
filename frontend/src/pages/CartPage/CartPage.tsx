@@ -64,6 +64,7 @@ export default function CartPage() {
                             </tr>
                         </tfoot>
                     </table>
+                    <Link to="/checkout">Proceed to Checkout</Link>
                 </>
             ) : (
                 <div className={styles.empty}>

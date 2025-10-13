@@ -1,18 +1,5 @@
-import { Children, useContext, type createContext } from "react"
-
-type ShippingInfo = {
-    fullName: string
-    email: string
-    address: string
-    city: string
-    zip: string
-}
-
-type PaymentInfo = {
-    cardHolder?: string
-    cardLast4?: string
-    stripePaymentId?: string
-}
+import type { PaymentInfo, ShippingInfo } from "@/types/Checkout"
+import { useContext, useState, createContext, type ReactNode } from "react"
 
 type CheckoutContextType = {
     shippingInfo: ShippingInfo | null
@@ -26,7 +13,33 @@ type CheckoutContextType = {
 
 const CheckoutContext = createContext<CheckoutContextType | undefined>(undefined)
 
-export const CheckoutProvider = ({ Children }: { children: ReactNode }) => {}
+export const CheckoutProvider = ({ children }: { children: ReactNode }) => {
+    const [shippingInfo, setShippingInfo] = useState<ShippingInfo | null>(null)
+    const [paymentInfo, setPaymentInfo] = useState<PaymentInfo | null>(null)
+    const [currentStep, setCurrentStep] = useState(1)
+
+    const resetCheckout = () => {
+        setShippingInfo(null)
+        setPaymentInfo(null)
+        setCurrentStep(1)
+    }
+
+    return (
+        <CheckoutContext.Provider
+            value={{
+                shippingInfo,
+                paymentInfo,
+                currentStep,
+                setShippingInfo,
+                setPaymentInfo,
+                setCurrentStep,
+                resetCheckout,
+            }}
+        >
+            {children}
+        </CheckoutContext.Provider>
+    )
+}
 
 export const useCheckout = (): CheckoutContextType => {
     const context = useContext(CheckoutContext)
