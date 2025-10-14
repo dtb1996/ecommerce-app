@@ -1,4 +1,4 @@
-import { PORT } from "./env.ts"
+import { FRONTEND_URL, PORT } from "./env.ts"
 import cors from "cors"
 import express from "express"
 import paymentRoutes from "./routes/payment.ts"
@@ -7,7 +7,7 @@ const app = express()
 
 app.use(
     cors({
-        origin: "http://localhost:5173",
+        origin: FRONTEND_URL,
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         credentials: true,
     }),

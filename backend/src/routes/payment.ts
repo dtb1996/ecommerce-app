@@ -1,6 +1,6 @@
 import express from "express"
 import Stripe from "stripe"
-import { STRIPE_SECRET_KEY } from "../env.ts"
+import { STRIPE_SECRET_KEY, FRONTEND_URL } from "../env.ts"
 
 const router = express.Router()
 
@@ -25,8 +25,8 @@ router.post("/create-checkout-session", async (req, res) => {
             payment_method_types: ["card"],
             line_items: lineItems,
             mode: "payment",
-            success_url: "http://localhost:5173/checkout/success",
-            cancel_url: "http://localhost:5173/cart",
+            success_url: `${FRONTEND_URL}/checkout/success`,
+            cancel_url: `${FRONTEND_URL}/cart`,
         })
 
         res.json({ url: session.url })

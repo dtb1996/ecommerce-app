@@ -3,9 +3,11 @@ import type { ShippingInfo } from "@/types/Checkout"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import styles from "./ShippingForm.module.scss"
 import { demoShipping } from "@/utils/demo"
+import { useNavigate } from "react-router-dom"
 
 export default function ShippingForm() {
-    const { shippingInfo, setShippingInfo, setCurrentStep } = useCheckout()
+    const { shippingInfo, setShippingInfo } = useCheckout()
+    const navigate = useNavigate()
 
     const { register, handleSubmit, reset } = useForm<ShippingInfo>({
         defaultValues: shippingInfo ?? {
@@ -19,14 +21,13 @@ export default function ShippingForm() {
 
     const onSubmit: SubmitHandler<ShippingInfo> = (data) => {
         setShippingInfo(data)
-        setCurrentStep(2)
         console.log("Shipping Info saved:", data)
+        navigate("../review")
     }
 
     const useDemo = () => {
         reset(demoShipping)
         setShippingInfo(demoShipping)
-        // setCurrentStep(2)
     }
 
     return (

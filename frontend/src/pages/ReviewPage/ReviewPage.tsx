@@ -12,11 +12,14 @@ export default function ReviewPage() {
 
     const handlePayment = async () => {
         try {
-            const res = await fetch("http://localhost:5000/api/payment/create-checkout-session", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ items: cartItems }),
-            })
+            const res = await fetch(
+                `${import.meta.env.VITE_API_URL}/api/payment/create-checkout-session`,
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ items: cartItems }),
+                }
+            )
 
             const data = await res.json()
             if (data.url) {
