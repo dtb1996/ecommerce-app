@@ -53,14 +53,14 @@ SUPABASE_SERVICE_KEY=<supabase-service-key-here>
 
 **Note:** Only variables prefixed with `VITE_` are exposed to your frontend when using Vite.
 
-### Option 2: Using Infisical (Recommended)
+### Option 2: Using Infisical
 
 Infisical allows you to securely store and sync environment variables across devices and environments.
 
 #### 1. Install Infisical CLI
 
 ```bash
-npm install -g i@nfisical/cli
+npm install -g @infisical/cli
 ```
 
 #### 2. Login and Link Your Project
