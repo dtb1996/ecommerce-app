@@ -39,7 +39,9 @@ You can configure environment variables in two ways — locally or via Infisical
 
 Copy the example file and add your local keys:
 
-`cp .env.example .env`
+```bash
+cp .env.example .env
+```
 
 Edit `.env`:
 
@@ -57,7 +59,9 @@ Infisical allows you to securely store and sync environment variables across dev
 
 #### 1. Install Infisical CLI
 
-`npm install -g infisical`
+```bash
+npm install -g i@nfisical/cli
+```
 
 #### 2. Login and Link Your Project
 
@@ -72,11 +76,15 @@ This creates an `infisical.json` file in your project root.
 
 For development:
 
-`infisical run --env=dev -- npm run dev`
+```bash
+infisical run --env=dev -- npm run dev
+```
 
 For production:
 
-`infisical run --env=prod -- npm run build`
+```bash
+infisical run --env=prod -- npm run build
+```
 
 `infisical run` automatically injects your remote secrets into the runtime environment.
 
@@ -84,7 +92,9 @@ For production:
 
 Run the local dev server:
 
-`npm run dev`
+```bash
+npm run dev
+```
 
 Lint and format code:
 
@@ -95,11 +105,15 @@ npm run format
 
 Build for production:
 
-`npm run build`
+```bash
+npm run build
+```
 
 Preview production build locally:
 
-`npm run preview`
+```bash
+npm run preview
+```
 
 ## Common Issues
 
@@ -109,14 +123,18 @@ Ensure `.env` or Infisical keys are available before running `npm run dev`.
 **2. TypeScript error for custom components**  
 Make sure component prop types extend native HTML attributes, for example:
 
-`type  ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: string
-};`
+```ts
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: string;
+};
+```
 
 **3. Styles not applying**  
 Check that SCSS modules are imported correctly:
 
-`import styles from  "./Button.module.scss"`
+```ts
+import styles from "./Button.module.scss";
+```
 
 ## Tech Stack
 
