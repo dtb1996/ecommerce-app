@@ -34,7 +34,7 @@ export default function ProductDetailsPage() {
     return product ? (
         <div className={styles.page}>
             <div className={styles.details}>
-                <img src={placeholder} alt={product.name} />
+                <img src={product.image_url ?? placeholder} alt={product.name} />
                 <div className={styles.info}>
                     <h1>{product.name}</h1>
                     <p className={styles.price}>${product.price.toFixed(2)}</p>

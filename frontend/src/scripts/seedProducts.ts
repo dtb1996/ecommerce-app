@@ -5,24 +5,25 @@ import { supabase } from "../api/supabaseServerClient.ts"
 const PRODUCT_COUNT = 25
 
 const categories = [
-    { name: "Tech", keyword: "electronics,gadgets" },
-    { name: "Home", keyword: "furniture,decor" },
-    { name: "Fitness", keyword: "gym,fitness" },
-    { name: "Clothing", keyword: "fashion,clothes" },
-    { name: "Outdoors", keyword: "camping,hiking" },
-    { name: "Accessories", keyword: "watches,jewelry" },
+    { name: "Tech", keywords: ["laptop", "headphones", "smartphone", "keyboard", "monitor"] },
+    { name: "Home", keywords: ["sofa", "lamp", "kitchen", "plants", "bookshelf"] },
+    { name: "Fitness", keywords: ["weights", "yoga", "gym", "running", "bicycle"] },
+    { name: "Clothing", keywords: ["shirt", "dress", "jacket", "shoes", "hoodie"] },
+    { name: "Outdoors", keywords: ["tent", "mountain", "forest", "campfire", "hiking"] },
+    { name: "Accessories", keywords: ["watch", "ring", "necklace", "bracelet", "sunglasses"] },
 ]
 
-const getImageUrl = (keyword: string) =>
-    `https://source.unsplash.com/400x400/?${encodeURIComponent(keyword)}`
-// `https://loremflickr.com/400/400/${encodeURIComponent(keyword)}`
+const BASE_URL = process.env.VITE_API_URL ?? "http://localhost:5000"
+
+const getImageUrl = (keyword: string) => `${BASE_URL}/api/image/${encodeURIComponent(keyword)}`
 
 function generateProduct() {
     const category = faker.helpers.arrayElement(categories)
+    const keyword = faker.helpers.arrayElement(category.keywords)
     const name = faker.commerce.productName()
     const description = faker.commerce.productDescription()
     const price = parseFloat(faker.commerce.price({ min: 10, max: 300, dec: 2 }))
-    const image_url = getImageUrl(category.keyword)
+    const image_url = getImageUrl(keyword)
     const in_stock = faker.datatype.boolean(0.8)
 
     return {
