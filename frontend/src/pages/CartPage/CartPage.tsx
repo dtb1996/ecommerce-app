@@ -1,11 +1,12 @@
-import { Button } from "@/components/common/Button/Button"
-import QuantitySelector from "@/components/common/QuantitySelector/QuantitySelector"
 import { useCart } from "@/context/CartContext"
 import { Link } from "react-router-dom"
 import styles from "./CartPage.module.scss"
+import CartItem from "@/components/Cart/CartItem"
+import React from "react"
+import { Button } from "@/components/common/Button/Button"
 
 export default function CartPage() {
-    const { cartItems, removeFromCart, updateQuantity, clearCart, totalPrice } = useCart()
+    const { cartItems, clearCart, totalPrice } = useCart()
 
     const handleClearCart = () => {
         if (window.confirm("This will remove all items from your cart. Continue?")) {
@@ -17,54 +18,44 @@ export default function CartPage() {
         <div className={styles.cart}>
             {cartItems.length > 0 ? (
                 <>
-                    <h1>Shopping Cart</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {cartItems.map((item) => (
-                                <tr key={item.id}>
-                                    <td data-label="Product">{item.name}</td>
-                                    <td data-label="Price">${item.price.toFixed(2)}</td>
-                                    <td data-label="Quantity">
-                                        <QuantitySelector
-                                            initialQuantity={item.quantity}
-                                            onQuantityChanged={(value) =>
-                                                updateQuantity(item.id, value)
-                                            }
-                                        />
-                                    </td>
-                                    <td data-label="Total">
-                                        ${(item.price * item.quantity).toFixed(2)}
-                                    </td>
-                                    <td data-label="" className={styles.actions}>
-                                        <Button onClick={() => removeFromCart(item.id)}>
-                                            Remove
-                                        </Button>
-                                    </td>
-                                </tr>
+                    <h1>Your Cart</h1>
+                    <div className={styles.details}>
+                        <div className={styles.items}>
+                            {cartItems.map((item, i) => (
+                                <React.Fragment key={item.id}>
+                                    <CartItem item={item} quantity={item.quantity} />
+                                    {i < cartItems.length - 1 && <hr className={styles.divider} />}
+                                </React.Fragment>
                             ))}
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td>Order Total:</td>
-                                <td>${totalPrice.toFixed(2)}</td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <Button onClick={handleClearCart}>Clear Cart</Button>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <Link to="/checkout">Proceed to Checkout</Link>
+                        </div>
+                        <div className={styles.summary}>
+                            <h2>Order Summary</h2>
+                            <div className={styles.row}>
+                                <span>Subtotal</span>
+                                <span>${totalPrice.toFixed(2)}</span>
+                            </div>
+                            <div className={styles.row}>
+                                <span>Discount</span>
+                                <span className={styles.negative}>$0.00</span>
+                            </div>
+                            <div className={styles.row}>
+                                <span>Delivery Fee</span>
+                                <span>$0.00</span>
+                            </div>
+                            <hr />
+                            <div className={`${styles.row} ${styles.total}`}>
+                                <span>Total</span>
+                                <span>${totalPrice.toFixed(2)}</span>
+                            </div>
+                            <div className={`${styles.row} ${styles.promo}`}>
+                                <input type="text" placeholder="Add promo code" />
+                                <Button children={"Apply"} className={styles.apply} />
+                            </div>
+                            <Link to="/checkout">
+                                <Button children={"Proceed to Checkout →"} />
+                            </Link>
+                        </div>
+                    </div>
                 </>
             ) : (
                 <div className={styles.empty}>

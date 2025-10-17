@@ -39,7 +39,7 @@ export default function ProductDetailsPage() {
                     <h1>{product.name}</h1>
                     <p className={styles.price}>${product.price.toFixed(2)}</p>
                     <p>{product.description}</p>
-                    <QuantitySelector initialQuantity={1} />
+                    <QuantitySelector quantity={1} />
                     <Button onClick={() => addToCart(product, 1)} children={"Add to Cart"} />
                     <p>Category: {product.category}</p>
                 </div>
