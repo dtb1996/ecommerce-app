@@ -5,7 +5,9 @@ export default function Footer() {
 
     return (
         <footer>
-            <p>Copyright &copy; {currentYear} Rolling Pixels. All rights reserved.</p>
+            <div className={styles.content}>
+                <p>Copyright &copy; {currentYear} Rolling Pixels. All rights reserved.</p>
+            </div>
         </footer>
     )
 }

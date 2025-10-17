@@ -2,8 +2,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 1200px; // Remove when app-level max-width is set
-    // max-width: 900px;
 
     h1 {
         margin-bottom: 1.5rem;
@@ -22,12 +20,9 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            // width: 50%;
             padding: 20px 24px;
-            // max-width: 715px;
-            background-color: var(--color-bg-light);
             border-radius: 1.25rem;
-            border-color: var(--color-bg-dark);
+            border: 1px solid var(--color-bg-dark);
 
             .divider {
                 border: none;
@@ -44,9 +39,8 @@
             padding: 20px 24px;
             width: 35%;
             max-width: 505px;
-            background-color: var(--color-bg-light);
             border-radius: 1.25rem;
-            border-color: var(--color-bg-dark);
+            border: 1px solid var(--color-bg-dark);
 
             h2 {
                 margin-bottom: 24px;
