@@ -1,12 +1,20 @@
-nav {
+.container {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
     padding: 1.5rem 0;
-    gap: 1.5rem;
     background-color: var(--color-bg-light);
     border-bottom: 1px solid var(--color-bg-dark);
 
+    .companyName {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
     a {
         font-weight: 600;
+        transition: opacity 0.2s ease;
 
         &,
         &:hover,
@@ -16,5 +24,53 @@ nav {
             text-decoration: none;
             color: inherit;
         }
+
+        &:hover {
+            opacity: 0.85;
+        }
     }
+
+    .linksLeft {
+        display: flex;
+        gap: 24px;
+        margin-right: auto;
+    }
+
+    .linksRight {
+        display: flex;
+        gap: 16px;
+
+        svg {
+            width: 20.25px;
+            height: 20.25px;
+            stroke-width: 3;
+        }
+    }
+
+    .searchContainer {
+        flex: 1;
+        position: relative;
+        max-width: 577px;
+
+        .icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-muted);
+            pointer-events: none;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.8rem;
+            border-radius: 9999px;
+            border: none;
+            background-color: var(--color-bg);
+            font-size: 1rem;
+        }
+    }
+}
+
+@media (max-width: 768px) {
 }

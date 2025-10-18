@@ -9,11 +9,21 @@ export default function Layout() {
             <div className={styles.topBar}>
                 Sign up and get 20% off your first order. <Link to="/login">Sign Up Now</Link>
             </div>
-            <Navbar />
+            <nav>
+                <div className={styles.contentWrapper}>
+                    <Navbar />
+                </div>
+            </nav>
             <main>
-                <Outlet />
+                <div className={styles.contentWrapper}>
+                    <Outlet />
+                </div>
             </main>
-            <Footer />
+            <footer>
+                <div className={styles.contentWrapper}>
+                    <Footer />
+                </div>
+            </footer>
         </div>
     )
 }
