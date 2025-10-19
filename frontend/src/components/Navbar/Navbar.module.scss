@@ -1,4 +1,4 @@
-.container {
+.navContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,11 +39,33 @@
     .linksRight {
         display: flex;
         gap: 16px;
+        position: relative;
 
         svg {
             width: 20.25px;
             height: 20.25px;
             stroke-width: 3;
+        }
+
+        .cartLink {
+            position: relative;
+            display: inline-flex;
+
+            .cartCount {
+                position: absolute;
+                top: -6px;
+                right: -10px;
+                background: var(--color-accent);
+                color: #fff;
+                font-size: 0.65rem;
+                font-weight: 700;
+                border-radius: 9999px;
+                padding: 0.15rem 0.4rem;
+                min-width: 1rem;
+                text-align: center;
+                line-height: 1;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            }
         }
     }
 
@@ -64,10 +86,6 @@
         input {
             width: 100%;
             padding: 0.75rem 1rem 0.75rem 2.8rem;
-            border-radius: 9999px;
-            border: none;
-            background-color: var(--color-bg);
-            font-size: 1rem;
         }
     }
 }

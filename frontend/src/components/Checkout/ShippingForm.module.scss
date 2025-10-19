@@ -1,5 +1,60 @@
 .shipping {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1.5rem;
+    padding: 20px 24px;
+    border-radius: 1.25rem;
+    border: 1px solid var(--color-bg-dark);
+
+    form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem 1.5rem;
+
+        h3 {
+            grid-column: 1 / -1;
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+        }
+
+        .streetAddress {
+            grid-column: 1 / -1;
+        }
+
+        button {
+            grid-column: 1 / -1;
+            justify-self: end;
+            margin-top: 0.5rem;
+        }
+    }
+
+    button {
+        min-width: 182px;
+    }
+
+    .demoButton {
+        align-self: flex-end;
+        color: var(--color-bg-light);
+        border: none;
+        border-radius: 9999px;
+        padding: 0.75rem 1.25rem;
+        cursor: pointer;
+        transition: background 0.2s ease;
+
+        &:hover {
+            background: var(--color-accent, #007bff);
+            color: #fff;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .shipping form {
+        grid-template-columns: 1fr;
+    }
 }

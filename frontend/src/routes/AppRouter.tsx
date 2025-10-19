@@ -10,9 +10,9 @@ const CartPage = lazy(() => import("@/pages/CartPage/CartPage"))
 const ProductsPage = lazy(() => import("@/pages/ProductsPage/ProductsPage"))
 const ProductDetailsPage = lazy(() => import("@/pages/ProductDetailsPage/ProductDetailsPage"))
 const CheckoutPage = lazy(() => import("@/pages/CheckoutPage/CheckoutPage"))
-const ShippingInfoPage = lazy(() => import("@/components/Checkout/ShippingForm"))
-const ReviewPage = lazy(() => import("@/pages/ReviewPage/ReviewPage"))
-const SuccessPage = lazy(() => import("@/pages/SuccessPage/SuccessPage"))
+const ShippingForm = lazy(() => import("@/components/Checkout/ShippingForm"))
+const ReviewOrder = lazy(() => import("@/components/Checkout/ReviewOrder"))
+const OrderSuccess = lazy(() => import("@/components/Checkout/OrderSuccess"))
 
 export default function AppRouter() {
     return (
@@ -36,9 +36,9 @@ export default function AppRouter() {
                         {/* Checkout */}
                         <Route path="/checkout" element={<CheckoutPage />}>
                             <Route index element={<Navigate to="shipping" replace />} />
-                            <Route path="shipping" element={<ShippingInfoPage />} />
-                            <Route path="review" element={<ReviewPage />} />
-                            <Route path="success" element={<SuccessPage />} />
+                            <Route path="shipping" element={<ShippingForm />} />
+                            <Route path="review" element={<ReviewOrder />} />
+                            <Route path="success" element={<OrderSuccess />} />
                         </Route>
                     </Route>
 

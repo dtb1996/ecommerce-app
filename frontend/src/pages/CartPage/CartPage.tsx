@@ -4,6 +4,8 @@ import styles from "./CartPage.module.scss"
 import CartItem from "@/components/Cart/CartItem"
 import React from "react"
 import { Button } from "@/components/common/Button/Button"
+import { LuTag } from "react-icons/lu"
+import { FaArrowRight } from "react-icons/fa6"
 
 export default function CartPage() {
     const { cartItems, clearCart, totalPrice } = useCart()
@@ -48,11 +50,17 @@ export default function CartPage() {
                                 <span>${totalPrice.toFixed(2)}</span>
                             </div>
                             <div className={`${styles.row} ${styles.promo}`}>
-                                <input type="text" placeholder="Add promo code" />
+                                <div className={styles.promoContainer}>
+                                    <LuTag className={styles.icon} />
+                                    <input type="text" placeholder="Add promo code" />
+                                </div>
                                 <Button children={"Apply"} className={styles.apply} />
                             </div>
                             <Link to="/checkout">
-                                <Button children={"Proceed to Checkout →"} />
+                                <Button>
+                                    Proceed to Checkout
+                                    <FaArrowRight />
+                                </Button>
                             </Link>
                         </div>
                     </div>

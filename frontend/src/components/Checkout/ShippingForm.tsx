@@ -4,6 +4,7 @@ import { useForm, type SubmitHandler } from "react-hook-form"
 import styles from "./ShippingForm.module.scss"
 import { demoShipping } from "@/utils/demo"
 import { useNavigate } from "react-router-dom"
+import { Button } from "../common/Button/Button"
 
 export default function ShippingForm() {
     const { shippingInfo, setShippingInfo } = useCheckout()
@@ -31,27 +32,33 @@ export default function ShippingForm() {
     }
 
     return (
-        <form className={styles.shipping} onSubmit={handleSubmit(onSubmit)}>
-            <label>Full Name</label>
-            <input {...register("fullName", { required: true })} />
+        <div className={styles.shipping}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <h3>Shipping Info</h3>
 
-            <label>Email</label>
-            <input {...register("email", { required: true })} />
+                <input {...register("fullName", { required: true })} placeholder="Full Name" />
 
-            <label>Street Address</label>
-            <input {...register("address", { required: true })} />
+                <input {...register("email", { required: true })} placeholder="Email" />
 
-            <label>City</label>
-            <input {...register("city", { required: true })} />
+                <input
+                    className={styles.streetAddress}
+                    {...register("address", { required: true })}
+                    placeholder="Street Address"
+                />
 
-            <label>Zip</label>
-            <input {...register("zip", { required: true })} />
+                <input {...register("city", { required: true })} placeholder="City" />
 
-            <button type="button" onClick={useDemo} aria-label="Fill with demo data">
-                Use demo data
-            </button>
+                <input {...register("zip", { required: true })} placeholder="Zip Code" />
 
-            <button type="submit">Next</button>
-        </form>
+                <Button>Next</Button>
+            </form>
+            <Button
+                className={styles.demoButton}
+                onClick={useDemo}
+                aria-label="Fill with demo data"
+            >
+                Use Demo Data
+            </Button>
+        </div>
     )
 }

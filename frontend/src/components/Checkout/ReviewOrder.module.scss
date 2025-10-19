@@ -1,0 +1,81 @@
+.review {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 20px 24px;
+    border-radius: 1.25rem;
+    border: 1px solid var(--color-bg-dark);
+
+    h3 {
+        font-size: 1.125rem;
+        color: var(--color-text-muted);
+    }
+
+    p,
+    li {
+        font-size: 0.95rem;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        margin: 0.5rem 0 0;
+        list-style: none;
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 0.5rem;
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+
+    .summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: -1rem;
+        padding-top: 0.8rem;
+        border-top: 1px solid var(--color-border, #ddd);
+
+        .totalPrice {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+    }
+
+    .demoPayment {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+        padding: 1rem 1.25rem;
+        background-color: var(--color-bg);
+        border-radius: 0.75rem;
+        border: 1px dashed var(--color-border, #ccc);
+        font-size: 0.9rem;
+
+        .demoCardInfo {
+            background-color: var(--color-bg-light);
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+    }
+
+    button {
+        align-self: flex-end;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width) {
+    .summary {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}

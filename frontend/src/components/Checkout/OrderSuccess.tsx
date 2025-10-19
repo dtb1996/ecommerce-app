@@ -1,8 +1,10 @@
 import { Button } from "@/components/common/Button/Button"
 import { useCart } from "@/context/CartContext"
 import { useCheckout } from "@/context/CheckoutContext"
+import styles from "./OrderSuccess.module.scss"
+import { Link } from "react-router-dom"
 
-export default function SuccessPage() {
+export default function OrderSuccess() {
     const { shippingInfo, resetCheckout } = useCheckout()
     const { clearCart } = useCart()
 
@@ -12,10 +14,12 @@ export default function SuccessPage() {
     }
 
     return (
-        <>
-            <h1>Order Confirmed</h1>
+        <div className={styles.container}>
+            <h2>Order Confirmed</h2>
             <p>Thank you for your purchase, {shippingInfo?.fullName}!</p>
-            <Button onClick={handleSuccessConfirm} children={"Start New Order"} />
-        </>
+            <Link to="/">
+                <Button onClick={handleSuccessConfirm}>Start New Order</Button>
+            </Link>
+        </div>
     )
 }
