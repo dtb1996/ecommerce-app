@@ -18,7 +18,7 @@ export default function ReviewOrder() {
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ items: cartItems }),
+                    body: JSON.stringify({ items: cartItems, shippingInfo }),
                 }
             )
 
