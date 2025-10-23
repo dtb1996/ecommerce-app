@@ -25,9 +25,9 @@ export default function AppRouter() {
                         <Route
                             path="/cart"
                             element={
-                                // <ProtectedRoute>
-                                <CartPage />
-                                // </ProtectedRoute>
+                                <ProtectedRoute>
+                                    <CartPage />
+                                </ProtectedRoute>
                             }
                         />
                         <Route path="/products" element={<ProductsPage />} />
