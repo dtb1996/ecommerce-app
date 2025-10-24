@@ -4,11 +4,11 @@ A modern, full-stack-ready **React + TypeScript** storefront application built f
 
 ## Features
 
-- **React 18 + TypeScript** — strict typing and component safety
-- **SCSS Modules** — locally scoped, themeable styles
-- **Modular UI components** — reusable `Button`, `QuantitySelector`, and layout primitives
-- **Environment Config with Infisical** — secure, centralized secret management
-- **Vite Dev Server** — fast builds and hot module reloading
+- **React 18 + TypeScript:** strict typing and component safety
+- **SCSS Modules:** locally scoped, themeable styles
+- **Modular UI components:** reusable `Button`, `QuantitySelector`, and layout primitives
+- **Environment Config with Infisical:** secure, centralized secret management
+- **Vite Dev Server:** fast builds and hot module reloading
 
 ## Project Structure
 
