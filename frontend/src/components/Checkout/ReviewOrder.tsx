@@ -70,7 +70,7 @@ export default function ReviewOrder() {
             </>
             <div className={styles.demoPayment} aria-label="Demo payment">
                 <p>
-                    If you would like to test payment quickly, use the following Stripe test card
+                    If you would like to test the payment flow, use the following Stripe test card
                     info:
                 </p>
                 <p className={styles.demoCardInfo}>
@@ -80,7 +80,7 @@ export default function ReviewOrder() {
                     <br />
                     <b>CVC:</b> any 3 digits
                 </p>
-                <p>This is Stripe test mode — these are fake cards and will not be charged.</p>
+                <p>This is Stripe test mode - the card will not be charged.</p>
             </div>
         </div>
     )

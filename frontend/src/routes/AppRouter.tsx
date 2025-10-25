@@ -22,19 +22,19 @@ export default function AppRouter() {
                     <Route element={<Layout />}>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/login" element={<LoginPage />} />
-                        <Route
-                            path="/cart"
-                            element={
-                                <ProtectedRoute>
-                                    <CartPage />
-                                </ProtectedRoute>
-                            }
-                        />
+                        <Route path="/cart" element={<CartPage />} />
                         <Route path="/products" element={<ProductsPage />} />
                         <Route path="/products/:id" element={<ProductDetailsPage />} />
 
                         {/* Checkout */}
-                        <Route path="/checkout" element={<CheckoutPage />}>
+                        <Route
+                            path="/checkout"
+                            element={
+                                <ProtectedRoute>
+                                    <CheckoutPage />
+                                </ProtectedRoute>
+                            }
+                        >
                             <Route index element={<Navigate to="shipping" replace />} />
                             <Route path="shipping" element={<ShippingForm />} />
                             <Route path="review" element={<ReviewOrder />} />
