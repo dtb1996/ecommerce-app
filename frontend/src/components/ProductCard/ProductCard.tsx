@@ -6,9 +6,11 @@ import placeholder from "@assets/images/placeholder.svg"
 export const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     return (
         <Link to={`/products/${product.id}`} className={styles.card}>
-            <img src={product.image_url ?? placeholder} alt={product.name} />
-            <h3>{product.name}</h3>
-            <p>${product.price.toFixed(2)}</p>
+            <div className={styles.imageWrapper}>
+                <img src={product.image_url ?? placeholder} alt={product.name} />
+            </div>
+            <h3 className={styles.name}>{product.name}</h3>
+            <p className={styles.price}>${product.price.toFixed(2)}</p>
         </Link>
     )
 }

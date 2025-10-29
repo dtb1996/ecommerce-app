@@ -1,0 +1,92 @@
+.filters {
+    display: flex;
+    flex-direction: column;
+
+    > *:not(:first-child) {
+        padding-top: 24px;
+    }
+
+    > *:not(:last-child) {
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--color-bg-dark);
+    }
+
+    h4 {
+        font-size: 1.125rem;
+    }
+
+    .heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        svg {
+            color: var(--color-text);
+            stroke-width: 3;
+            font-size: 1.125rem;
+            opacity: 0.4;
+        }
+    }
+
+    .section {
+        h4 {
+            margin-bottom: 1.125rem;
+        }
+    }
+
+    .categoryButtons {
+        display: flex;
+        flex-direction: column;
+        gap: 1.125rem;
+
+        button {
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+            width: 100%;
+            color: var(--color-text-muted);
+            background-color: transparent;
+
+            svg {
+                stroke-width: 3;
+            }
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+
+        .selectedButton {
+            color: var(--color-text);
+        }
+    }
+
+    .slider {
+        margin: 1.125rem 0.625rem 0;
+
+        .track {
+            height: 6px;
+            background: var(--color-bg-dark);
+            border-radius: 4px;
+            position: relative;
+            width: 100%;
+        }
+
+        .thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background-color: var(--color-text);
+            cursor: grab;
+        }
+
+        .priceLabels {
+            margin: 0.75rem -0.625rem 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--color-text);
+            font-weight: 600;
+        }
+    }
+}

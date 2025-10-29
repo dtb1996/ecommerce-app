@@ -1,31 +1,45 @@
 .card {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
     text-align: center;
     background: var(--color-bg-light);
-    border: 1px solid var(--color-border);
-    border-radius: 0.5rem;
     overflow: hidden;
+    text-align: left;
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
 
+    .imageWrapper {
+        position: relative;
+        border-radius: 1.25rem;
+        overflow: hidden;
+        aspect-ratio: 295 / 298;
+    }
+
     img {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: auto;
+        height: 100%;
         object-fit: cover;
+        transition: transform 0.2s ease;
     }
 
-    h3 {
-        font-size: 1rem;
-        margin: 0.5rem 0;
+    .name {
+        margin-top: 1rem;
+        width: 100%;
+        font-size: 1.25rem;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
-    p {
-        font-weight: 500;
-        color: var(--color-text-muted);
-        margin-bottom: 0.75rem;
+    .price {
+        margin-top: 0.5rem;
+        font-size: 1.5rem;
+        font-weight: 700;
     }
 
     &,
@@ -37,14 +51,15 @@
         color: inherit;
     }
 
-    &:hover,
-    &:focus-visible {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-elevation-1);
+    &:hover img {
+        transform: scale(1.1);
     }
+}
 
-    &:focus-visible {
-        outline: 2px solid var(--accent-color, #0070f3);
-        outline-offset: 2px;
+@media (max-width: 768px) {
+    .card {
+        .imageWrapper {
+            aspect-ratio: 172 / 174;
+        }
     }
 }
