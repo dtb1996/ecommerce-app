@@ -22,21 +22,32 @@ export default function ProductFilters({
     selectedPriceRange,
     onPriceChange,
 }: ProductFiltersProps) {
-    const roundedMin = Math.floor(priceRange.min)
-    const roundedMax = Math.ceil(priceRange.max)
+    const roundedMin = Math.floor(priceRange.min ?? 0)
+    const roundedMax = Math.ceil(priceRange.max ?? 0)
 
-    const displaySelected: [number, number] = [
-        Math.round(selectedPriceRange[0]),
-        Math.round(selectedPriceRange[1]),
-    ]
+    const step = 1
+    const validRange = Number.isFinite(roundedMin) && Number.isFinite(roundedMax)
 
-    const clampedValues: [number, number] = [
-        Math.max(roundedMin, selectedPriceRange[0]),
-        Math.min(roundedMax, selectedPriceRange[1]),
-    ]
+    const safeValues: [number, number] = useMemo(() => {
+        if (!validRange) return [0, 0]
+
+        const [selMin, selMax] = selectedPriceRange
+
+        const clamp = (val: number) =>
+            Math.min(Math.max(Math.round(val / step) * step, roundedMin), roundedMax)
+
+        const clampedMin = clamp(selMin)
+        const clampedMax = clamp(selMax)
+
+        return [Math.min(clampedMin, clampedMax), Math.max(clampedMin, clampedMax)]
+    }, [selectedPriceRange, roundedMin, roundedMax, validRange])
 
     function handleCategorySelect(category: string) {
         onCategoryChange(selectedCategory === category ? null : category)
+    }
+
+    if (!validRange) {
+        return null
     }
 
     return (
@@ -65,37 +76,41 @@ export default function ProductFilters({
             <div className={styles.section}>
                 <h4>Price</h4>
                 <div className={styles.slider}>
-                    {priceRange.max > priceRange.min && (
-                        <Range
-                            min={roundedMin}
-                            max={roundedMax}
-                            step={1}
-                            values={clampedValues}
-                            onChange={(values) => onPriceChange(values as [number, number])}
-                            renderTrack={({ props, children }) => {
-                                return (
-                                    <div
-                                        {...props}
-                                        className={styles.track}
-                                        style={{
-                                            background: getTrackBackground({
-                                                values: clampedValues,
-                                                colors: ["#F0F0F0", "#222", "#F0F0F0"],
-                                                min: roundedMin,
-                                                max: roundedMax,
-                                            }),
-                                        }}
-                                    >
-                                        {children}
-                                    </div>
-                                )
-                            }}
-                            renderThumb={({ props }) => {
-                                const { key, ...rest } = props
-                                return <div key={key} {...rest} className={styles.thumb} />
-                            }}
-                        />
-                    )}
+                    <Range
+                        min={roundedMin}
+                        max={roundedMax}
+                        step={1}
+                        values={safeValues}
+                        onChange={(values) => {
+                            const [min, max] = values
+                            onPriceChange([
+                                Math.min(Math.max(min, roundedMin), roundedMax),
+                                Math.min(Math.max(max, roundedMin), roundedMax),
+                            ])
+                        }}
+                        renderTrack={({ props, children }) => {
+                            return (
+                                <div
+                                    {...props}
+                                    className={styles.track}
+                                    style={{
+                                        background: getTrackBackground({
+                                            values: safeValues,
+                                            colors: ["#F0F0F0", "#222", "#F0F0F0"],
+                                            min: roundedMin,
+                                            max: roundedMax,
+                                        }),
+                                    }}
+                                >
+                                    {children}
+                                </div>
+                            )
+                        }}
+                        renderThumb={({ props }) => {
+                            const { key, ...rest } = props
+                            return <div key={key} {...rest} className={styles.thumb} />
+                        }}
+                    />
 
                     <div className={styles.priceLabels}>
                         <span>${selectedPriceRange[0].toFixed(0)}</span>

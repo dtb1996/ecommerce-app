@@ -1,70 +1,40 @@
-import { supabase } from "@/api/supabaseClient"
 import { ProductCard } from "@/components/ProductCard/ProductCard"
-import type { Product } from "@/types/Product"
 import { useEffect, useState } from "react"
 import styles from "./ProductsPage.module.scss"
 import { Button } from "@/components/common/Button/Button"
 import { LuListFilter } from "react-icons/lu"
 import ProductFilters from "@/components/ProductFilters/ProductFilters"
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6"
+import { useProducts } from "@/hooks/useProducts"
+import { useResponsiveProducts } from "@/hooks/useResponsiveProducts"
+import { getVisiblePages } from "@/utils/pagination"
 
 export default function ProductsPage() {
-    const [allProducts, setAllProducts] = useState<Product[]>([])
-    const [filterProducts, setFilteredProducts] = useState<Product[]>([])
-    const [categories, setCategories] = useState<string[]>([])
-    const [priceRange, setPriceRange] = useState<{ min: number; max: number }>({ min: 0, max: 0 })
-    const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-    const [selectedPriceRange, setSelectedPriceRange] = useState<[number, number]>([0, 300])
+    const {
+        filteredProducts,
+        categories,
+        priceRange,
+        selectedCategory,
+        setSelectedCategory,
+        selectedPriceRange,
+        setSelectedPriceRange,
+    } = useProducts()
 
+    const { isMobile, productsPerPage } = useResponsiveProducts()
+    const [currentPage, setCurrentPage] = useState<number>(1)
+
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage)
+
+    // Clamp currentPage
     useEffect(() => {
-        fetchProducts()
-    }, [])
-
-    async function fetchProducts(): Promise<void> {
-        const { data, error } = await supabase.from("products").select()
-
-        if (error) {
-            console.error("Error fetching products:", error)
-            setAllProducts([])
-            setFilteredProducts([])
-        } else if (data) {
-            setAllProducts(data)
-            setFilteredProducts(data)
-
-            // Get unique categories
-            const uniqueCategories = Array.from(new Set(data.map((p) => p.category)))
-            setCategories(uniqueCategories)
-
-            //Get min and max prices
-            const prices = data.map((p) => p.price)
-            setPriceRange({ min: Math.min(...prices), max: Math.max(...prices) })
+        if (currentPage > totalPages) {
+            setCurrentPage(totalPages || 1)
         }
-    }
+    }, [currentPage, totalPages])
 
-    useEffect(() => {
-        const filtered = allProducts.filter((p) => {
-            const inCategory = !selectedCategory || p.category === selectedCategory
-            const inPriceRange =
-                p.price >= selectedPriceRange[0] && p.price <= selectedPriceRange[1]
-            return inCategory && inPriceRange
-        })
-        setFilteredProducts(filtered)
-    }, [selectedCategory, selectedPriceRange, allProducts])
-
-    useEffect(() => {
-        if (priceRange.min < priceRange.max) {
-            setSelectedPriceRange([priceRange.min, priceRange.max])
-        }
-    }, [priceRange.min, priceRange.max])
-
-    useEffect(() => {
-        if (allProducts.length) {
-            const prices = allProducts.map((p) => p.price)
-            const minPrice = Math.min(...prices)
-            const maxPrice = Math.max(...prices)
-            setPriceRange({ min: minPrice, max: maxPrice })
-            setSelectedPriceRange([minPrice, maxPrice])
-        }
-    }, [allProducts])
+    const startIndex = (currentPage - 1) * productsPerPage
+    const currentProducts = filteredProducts.slice(startIndex, startIndex + productsPerPage)
+    const visiblePages = getVisiblePages(currentPage, totalPages, isMobile ? 4 : 6)
 
     return (
         <div className={styles.page}>
@@ -87,12 +57,46 @@ export default function ProductsPage() {
                 </Button>
 
                 <div className={styles.productsGrid}>
-                    {filterProducts.map((product) => (
+                    {currentProducts.map((product) => (
                         <ProductCard key={product.id} product={product} />
                     ))}
                 </div>
 
-                <div className={styles.pagination}>{/* TODO: add page selector/arrows here */}</div>
+                <div className={styles.pagination}>
+                    <Button
+                        className={styles.paginationButton}
+                        onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                        disabled={currentPage === 1}
+                    >
+                        <FaArrowLeft />
+                        Previous
+                    </Button>
+                    <div className={styles.pages}>
+                        {visiblePages.map((page, i) =>
+                            page === "…" ? (
+                                <span key={`ellipsis-${i}`} className={styles.ellipsis}>
+                                    …
+                                </span>
+                            ) : (
+                                <button
+                                    key={page}
+                                    onClick={() => setCurrentPage(page as number)}
+                                    className={page === currentPage ? styles.active : ""}
+                                >
+                                    {page}
+                                </button>
+                            )
+                        )}
+                    </div>
+                    <Button
+                        className={styles.paginationButton}
+                        onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+                        disabled={currentPage === totalPages}
+                    >
+                        Next
+                        <FaArrowRight />
+                    </Button>
+                </div>
             </section>
         </div>
     )
