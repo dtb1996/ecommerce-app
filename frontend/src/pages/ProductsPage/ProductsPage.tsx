@@ -33,8 +33,10 @@ export default function ProductsPage() {
     }, [currentPage, totalPages])
 
     const startIndex = (currentPage - 1) * productsPerPage
+    const endIndex = Math.min(currentPage * productsPerPage, filteredProducts.length)
     const currentProducts = filteredProducts.slice(startIndex, startIndex + productsPerPage)
     const visiblePages = getVisiblePages(currentPage, totalPages, isMobile ? 4 : 6)
+    const currentPageProductsRange = `${startIndex + 1} - ${endIndex}`
 
     return (
         <div className={styles.page}>
@@ -52,9 +54,15 @@ export default function ProductsPage() {
             </aside>
 
             <section className={styles.productsArea}>
-                <Button onClick={() => {}} className={styles.filtersButton}>
-                    <LuListFilter />
-                </Button>
+                <div className={styles.pageInfo}>
+                    <h3>{selectedCategory ? selectedCategory : "All Products"}</h3>
+
+                    <p>{`Showing ${currentPageProductsRange} of ${filteredProducts.length} Product${filteredProducts.length === 1 ? "" : "s"}`}</p>
+
+                    <Button onClick={() => {}} className={styles.filtersButton}>
+                        <LuListFilter />
+                    </Button>
+                </div>
 
                 <div className={styles.productsGrid}>
                     {currentProducts.map((product) => (

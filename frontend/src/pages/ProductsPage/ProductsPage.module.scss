@@ -15,16 +15,34 @@
         display: flex;
         flex-direction: column;
 
-        .filtersButton {
-            width: 32px;
-            height: 32px;
-            background-color: var(--color-bg-dark);
-            padding: 0;
-            display: none;
+        .pageInfo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
 
-            svg {
-                color: var(--color-text);
-                stroke-width: 3;
+            h3 {
+                font-size: 2rem;
+            }
+
+            p {
+                align-self: flex-end;
+                margin-bottom: 0.5rem;
+                color: var(--color-text-muted);
+            }
+
+            .filtersButton {
+                width: 32px;
+                height: 32px;
+                background-color: var(--color-bg-dark);
+                padding: 0;
+                display: none;
+
+                svg {
+                    margin-top: 0.375rem;
+                    color: var(--color-text);
+                    stroke-width: 3;
+                }
             }
         }
 
@@ -98,7 +116,7 @@
         }
 
         .productsArea {
-            .filtersButton {
+            .pageInfo .filtersButton {
                 display: block;
             }
 
