@@ -8,6 +8,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa6"
 import { useProducts } from "@/hooks/useProducts"
 import { useResponsiveProducts } from "@/hooks/useResponsiveProducts"
 import { getVisiblePages } from "@/utils/pagination"
+import Navbar from "@/components/Navbar/Navbar"
 
 export default function ProductsPage() {
     const {
@@ -22,6 +23,31 @@ export default function ProductsPage() {
 
     const { isMobile, productsPerPage } = useResponsiveProducts()
     const [currentPage, setCurrentPage] = useState<number>(1)
+    const [filtersOpen, setFiltersOpen] = useState<boolean>(false)
+    const [headerHeight, setHeaderHeight] = useState(0)
+
+    useEffect(() => {
+        const updateHeaderHeight = () => {
+            const banner = document.getElementById("banner")
+            const navbar = document.getElementById("navbar")
+            if (banner && navbar) {
+                setHeaderHeight(banner.offsetHeight + navbar.offsetHeight)
+            }
+        }
+
+        updateHeaderHeight()
+        window.addEventListener("resize", updateHeaderHeight)
+
+        // Observe DOM changes (banner toggling)
+        const observer = new MutationObserver(updateHeaderHeight)
+        const banner = document.getElementById("banner")
+        if (banner) observer.observe(banner, { childList: true, subtree: true })
+
+        return () => {
+            window.removeEventListener("resize", updateHeaderHeight)
+            observer.disconnect()
+        }
+    }, [])
 
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage)
 
@@ -39,7 +65,7 @@ export default function ProductsPage() {
     const currentPageProductsRange = `${startIndex + 1} - ${endIndex}`
 
     return (
-        <div className={styles.page}>
+        <div className={`${styles.page} ${isMobile && filtersOpen ? styles.filtersOpen : ""}`}>
             <aside className={styles.filters}>
                 {priceRange.max > priceRange.min && (
                     <ProductFilters
@@ -53,13 +79,36 @@ export default function ProductsPage() {
                 )}
             </aside>
 
+            {isMobile && filtersOpen && (
+                <div className={styles.mobileFiltersOverlay} onClick={() => setFiltersOpen(false)}>
+                    <div
+                        className={styles.mobileFilters}
+                        style={{
+                            top: `${headerHeight}px`,
+                            height: `calc(100vh - ${headerHeight}px)`,
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <ProductFilters
+                            categories={categories}
+                            priceRange={priceRange}
+                            selectedCategory={selectedCategory}
+                            onCategoryChange={setSelectedCategory}
+                            selectedPriceRange={selectedPriceRange}
+                            onPriceChange={setSelectedPriceRange}
+                            onClose={() => setFiltersOpen(false)}
+                        />
+                    </div>
+                </div>
+            )}
+
             <section className={styles.productsArea}>
                 <div className={styles.pageInfo}>
                     <h3>{selectedCategory ? selectedCategory : "All Products"}</h3>
 
                     <p>{`Showing ${currentPageProductsRange} of ${filteredProducts.length} Product${filteredProducts.length === 1 ? "" : "s"}`}</p>
 
-                    <Button onClick={() => {}} className={styles.filtersButton}>
+                    <Button onClick={() => setFiltersOpen(true)} className={styles.filtersButton}>
                         <LuListFilter />
                     </Button>
                 </div>

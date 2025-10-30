@@ -1,7 +1,7 @@
 import { LuListFilter } from "react-icons/lu"
 import styles from "./ProductFilters.module.scss"
 import { Button } from "../common/Button/Button"
-import { IoChevronForward } from "react-icons/io5"
+import { IoChevronForward, IoClose } from "react-icons/io5"
 import { Range, getTrackBackground } from "react-range"
 import { useMemo } from "react"
 
@@ -12,6 +12,7 @@ interface ProductFiltersProps {
     onCategoryChange: (category: string | null) => void
     selectedPriceRange: [number, number]
     onPriceChange: (range: [number, number]) => void
+    onClose?: () => void
 }
 
 export default function ProductFilters({
@@ -21,6 +22,7 @@ export default function ProductFilters({
     onCategoryChange,
     selectedPriceRange,
     onPriceChange,
+    onClose,
 }: ProductFiltersProps) {
     const roundedMin = Math.floor(priceRange.min ?? 0)
     const roundedMax = Math.ceil(priceRange.max ?? 0)
@@ -54,7 +56,10 @@ export default function ProductFilters({
         <div className={styles.filters}>
             <div className={styles.heading}>
                 <h4>Filters</h4>
-                <LuListFilter />
+                <LuListFilter className={styles.filtersSymbol} />
+                <Button onClick={onClose} aria-label="Close filters" className={styles.closeButton}>
+                    <IoClose />
+                </Button>
             </div>
 
             <div className={styles.section}>

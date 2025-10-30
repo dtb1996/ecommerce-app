@@ -26,6 +26,23 @@
             font-size: 1.125rem;
             opacity: 0.4;
         }
+
+        .filtersSymbol {
+            display: block;
+        }
+
+        .closeButton {
+            display: none;
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            border-radius: 0;
+            background-color: transparent;
+
+            svg {
+                font-size: 1.5rem;
+            }
+        }
     }
 
     .section {
@@ -87,6 +104,20 @@
             font-size: 0.9rem;
             color: var(--color-text);
             font-weight: 600;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .filters {
+        .heading {
+            .filtersSymbol {
+                display: none;
+            }
+
+            .closeButton {
+                display: block;
+            }
         }
     }
 }

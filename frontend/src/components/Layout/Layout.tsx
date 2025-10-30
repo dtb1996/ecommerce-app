@@ -19,29 +19,31 @@ export default function Layout() {
 
     return (
         <div className={styles.layout}>
-            <AnimatePresence>
-                {announcementVisible && (
-                    <motion.div
-                        className={styles.announcementBanner}
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -50 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                    >
-                        <div>
-                            Sign up and get 20% off your first order.{" "}
-                            <Link to="/login">Sign Up Now</Link>
-                        </div>
-                        <Button
-                            onClick={() => setAnnouncementVisible(false)}
-                            aria-label="Close announcement banner"
+            <div id="banner">
+                <AnimatePresence>
+                    {announcementVisible && (
+                        <motion.div
+                            className={styles.announcementBanner}
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -50 }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
                         >
-                            <IoClose />
-                        </Button>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-            <nav>
+                            <div>
+                                Sign up and get 20% off your first order.{" "}
+                                <Link to="/login">Sign Up Now</Link>
+                            </div>
+                            <Button
+                                onClick={() => setAnnouncementVisible(false)}
+                                aria-label="Close announcement banner"
+                            >
+                                <IoClose />
+                            </Button>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+            <nav id="navbar">
                 <div className={styles.contentWrapper}>
                     <Navbar />
                 </div>
