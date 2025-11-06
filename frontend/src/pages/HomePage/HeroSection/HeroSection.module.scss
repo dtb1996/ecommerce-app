@@ -1,0 +1,63 @@
+.hero {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: var(--color-bg);
+    background-image:
+        linear-gradient(to right, var(--color-bg), transparent),
+        url("@assets/images/sitting-on-top-of-rock.jpg");
+    background-size: 120% auto;
+    background-position: -20% center;
+    background-repeat: no-repeat;
+
+    .heroText {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin: 103px 40px 80px 100px;
+        max-width: 596px;
+
+        h1 {
+            max-width: 577px;
+            font-size: 3.5rem;
+            line-height: 4rem;
+            text-transform: uppercase;
+        }
+
+        p {
+            color: var(--color-text-muted);
+        }
+
+        button {
+            width: 210px;
+        }
+
+        .metrics {
+            display: flex;
+            margin-top: 1rem;
+
+            > *:not(:first-child):not(:last-child) {
+                padding: 0px 32px;
+            }
+
+            > *:not(:last-child) {
+                padding-right: 32px;
+                border-right: 1px solid var(--color-border);
+            }
+
+            > *:not(:first-child) {
+                padding-left: 32px;
+            }
+
+            .metric {
+                h3 {
+                    font-size: 2.5rem;
+                }
+
+                p {
+                    color: var(--color-text-muted);
+                }
+            }
+        }
+    }
+}

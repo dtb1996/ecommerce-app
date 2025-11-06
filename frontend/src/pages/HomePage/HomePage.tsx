@@ -1,3 +1,12 @@
+import BrandStrip from "./BrandStrip/BrandStrip"
+import HeroSection from "./HeroSection/HeroSection"
+import styles from "./HomePage.module.scss"
+
 export default function HomePage() {
-    return <h1>This is the Home component</h1>
+    return (
+        <div>
+            <HeroSection />
+            <BrandStrip />
+        </div>
+    )
 }
