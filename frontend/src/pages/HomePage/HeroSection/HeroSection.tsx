@@ -10,7 +10,7 @@ export default function HeroSection() {
     }
 
     return (
-        <section className={styles.hero}>
+        <div className={styles.hero}>
             <div className={styles.heroText}>
                 <h1>Find Products that Match Your Lifestyle</h1>
                 <p>
@@ -33,6 +33,6 @@ export default function HeroSection() {
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     )
 }

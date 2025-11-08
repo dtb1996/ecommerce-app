@@ -7,12 +7,12 @@ import brand5 from "@assets/icons/brand-logo-5.svg"
 
 export default function BrandStrip() {
     return (
-        <section className={styles.brandStrip}>
+        <div className={styles.brandStrip}>
             <img src={brand1} />
             <img src={brand2} />
             <img src={brand3} />
             <img src={brand4} />
             <img src={brand5} />
-        </section>
+        </div>
     )
 }

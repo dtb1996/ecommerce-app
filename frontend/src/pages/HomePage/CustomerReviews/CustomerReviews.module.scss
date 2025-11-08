@@ -1,0 +1,41 @@
+.customerReviews {
+    display: flex;
+    flex-direction: column;
+
+    .heading {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 40px;
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .scroll {
+            display: flex;
+            gap: 16px;
+
+            button {
+                padding: 4px 8px;
+                background: none;
+                color: var(--color-text);
+
+                svg {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+    }
+
+    .reviewList {
+        display: flex;
+        gap: 20px;
+        margin-top: 40px;
+    }
+}
