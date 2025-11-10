@@ -61,3 +61,57 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .hero {
+        .heroText {
+            margin: 40px 16px 0;
+            gap: 1.25rem;
+            align-items: center;
+            width: 100%;
+
+            h1 {
+                max-width: fit-content;
+                font-size: 2.25rem;
+                line-height: 2.125rem;
+            }
+
+            p {
+                font-size: 0.875rem;
+            }
+
+            button {
+                width: 100%;
+                max-width: 358px;
+            }
+
+            .metrics {
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 0;
+
+                > *:not(:first-child):not(:last-child) {
+                    padding: 0px 27.5px;
+                }
+
+                > *:not(:last-child) {
+                    padding-right: 27.5px;
+                }
+
+                > *:not(:first-child) {
+                    padding-left: 27.5px;
+                }
+
+                .metric {
+                    h3 {
+                        font-size: 1.5rem;
+                    }
+
+                    p {
+                        font-size: 0.75rem;
+                    }
+                }
+            }
+        }
+    }
+}

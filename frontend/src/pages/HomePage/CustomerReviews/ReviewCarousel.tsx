@@ -4,14 +4,10 @@ import { ReviewCard } from "@/components/ReviewCard/ReviewCard"
 
 type Props = {
     reviews: Review[]
-    currentIndex: number
-    visibleCount?: number
 }
 
-export const ReviewCarousel: React.FC<Props> = ({ reviews, currentIndex, visibleCount = 3 }) => {
-    const extended = [...reviews, ...reviews.slice(0, visibleCount)]
-    const slideWidth = 100 / visibleCount
-    const translateX = -(currentIndex * slideWidth)
+export const ReviewCarousel: React.FC<Props> = ({ reviews }) => {
+    // const extended = [...reviews, ...reviews.slice(0, visibleCount)]
 
     return (
         // <div className={styles.viewport}>
@@ -22,7 +18,7 @@ export const ReviewCarousel: React.FC<Props> = ({ reviews, currentIndex, visible
             //     width: `${(extended.length * 100) / visibleCount}%`,
             // }}
         >
-            {extended.map((review, i) => (
+            {reviews.map((review, i) => (
                 // <div key={i} className={styles.slide} style={{ width: `${slideWidth}%` }}>
                 <div key={i} className={styles.item}>
                     <ReviewCard review={review} />

@@ -1,12 +1,32 @@
 .brandStrip {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 34px;
     padding: 20px 100px;
     background-color: black;
 
     img {
+        width: auto;
+        max-height: 40px;
         filter: brightness(0) invert(1);
+    }
+}
+
+@media (max-width: 900px) {
+    .brandStrip {
+        gap: 24px;
+        padding: 40px 16px;
+
+        img {
+            max-height: 30px;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .brandStrip {
+        gap: 16px;
     }
 }
