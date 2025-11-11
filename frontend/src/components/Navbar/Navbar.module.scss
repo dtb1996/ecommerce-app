@@ -6,10 +6,13 @@
     padding: 1.5rem 0;
     background-color: var(--color-bg-light);
     border-bottom: 1px solid var(--color-bg-dark);
+    position: relative;
+    z-index: 20;
 
     .companyName {
         font-size: 2rem;
         font-weight: 700;
+        z-index: 11;
     }
 
     a {
@@ -34,17 +37,25 @@
         display: flex;
         gap: 24px;
         margin-right: auto;
+        transition:
+            transform 0.3s ease,
+            opacity 0.3s ease;
     }
 
     .linksRight {
-        display: flex;
-        gap: 16px;
         position: relative;
+        display: flex;
+        align-items: center;
+        gap: 16px;
 
         svg {
-            width: 20.25px;
-            height: 20.25px;
+            width: 24px;
+            height: 24px;
             stroke-width: 3;
+        }
+
+        .mobileSearch {
+            display: none;
         }
 
         .cartLink {
@@ -67,6 +78,11 @@
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
             }
         }
+
+        button {
+            background: none;
+            border: none;
+        }
     }
 
     .searchContainer {
@@ -88,7 +104,87 @@
             padding: 0.75rem 1rem 0.75rem 2.8rem;
         }
     }
+
+    .menuButton {
+        display: none;
+        background: none;
+        border: none;
+        z-index: 11;
+
+        svg {
+            width: 28px;
+            height: 28px;
+            stroke-width: 2.5;
+        }
+    }
 }
 
 @media (max-width: 768px) {
+    .navContainer {
+        padding: 1.25rem 1rem;
+        gap: 16px;
+
+        .menuButton {
+            display: block;
+            margin-left: 1rem;
+        }
+
+        .companyName {
+            margin-left: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .linksLeft {
+            position: fixed;
+            top: 0;
+            left: 0;
+            flex-direction: column;
+            background: var(--color-bg-light);
+            width: 250px;
+            height: 100vh;
+            padding-top: 6rem;
+            gap: 2rem;
+            align-items: flex-start;
+            padding-left: 2rem;
+            transform: translateX(-100%);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 25;
+        }
+
+        .linksLeft.show {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .searchContainer {
+            display: none;
+        }
+
+        .linksRight {
+            margin-left: auto;
+            gap: 20px;
+
+            .mobileSearch {
+                display: block;
+            }
+        }
+    }
+
+    .backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+        z-index: 15;
+    }
+
+    .backdrop.show {
+        opacity: 1;
+        visibility: visible;
+    }
 }

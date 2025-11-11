@@ -46,15 +46,15 @@
 
     .contentWrapper {
         width: 100%;
-        max-width: 1240px;
-        margin: 0 auto;
-        padding: 0 2rem;
-        box-sizing: border-box;
+        max-width: 1440px;
+        // margin: 0 auto;
+        justify-self: center;
     }
 
     nav {
         position: sticky;
         top: 0;
+        // padding: 0 1rem;
         z-index: 50;
     }
 
@@ -64,8 +64,34 @@
     }
 
     footer {
+        display: flex;
+        justify-content: center;
         position: sticky;
         bottom: 0;
+        padding: 1rem 0;
         z-index: 50;
+        background-color: var(--color-bg-dark);
+    }
+
+    @media (max-width: 768px) {
+        .announcementBanner {
+            font-size: 0.75rem;
+
+            button {
+                display: none;
+            }
+        }
+
+        .contentWrapper {
+            padding: 0;
+        }
+
+        nav {
+            padding: 0;
+        }
+
+        main {
+            padding: 1.25rem 0 5rem;
+        }
     }
 }
