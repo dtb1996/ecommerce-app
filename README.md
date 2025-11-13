@@ -147,6 +147,11 @@ import styles from "./Button.module.scss";
 - **CI/CD:** [GitHub Actions](https://github.com/features/actions), [Netlify](https://www.netlify.com/) for hosting
 - **Image Handling:** [Unsplash](https://unsplash.com/) or [LoremFlickr](https://loremflickr.com/) for placeholder images
 
+## Credits
+
+Design inspired by [E-commerce Website Template Freebie](https://www.figma.com/community/file/1273571982885059508/e-commerce-website-template-freebie) by [Utsav Chauhan](https://www.figma.com/@utsavchauhan), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).  
+Modified for portfolio use.
+
 ## License
 
 This project is licensed under the **MIT License**.  
