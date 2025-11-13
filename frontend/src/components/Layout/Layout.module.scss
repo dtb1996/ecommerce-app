@@ -66,11 +66,9 @@
     footer {
         display: flex;
         justify-content: center;
-        position: sticky;
-        bottom: 0;
-        padding: 1rem 0;
+        padding: 0 1rem 0.5rem;
         z-index: 45;
-        background-color: var(--color-bg-dark);
+        background-color: var(--color-bg-footer);
     }
 
     @media (max-width: 768px) {
