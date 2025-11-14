@@ -8,14 +8,6 @@ export default function Footer() {
     return (
         <div className={styles.footer}>
             <section className={styles.topSection}>
-                <h2>STAY UP TO DATE ABOUT OUR LATEST OFFERS</h2>
-                <div className={styles.emailInput}>
-                    <input />
-                    <Button>Subscribe to Newsletter</Button>
-                </div>
-            </section>
-
-            <section className={styles.middleSection}>
                 <div className={styles.brandColumn}>
                     <h2 className={styles.logo}>SHOP.CO</h2>
                     <p className={styles.description}>

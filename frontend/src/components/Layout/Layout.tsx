@@ -6,6 +6,8 @@ import { useEffect, useState } from "react"
 import { Button } from "../common/Button/Button"
 import { IoClose } from "react-icons/io5"
 import { AnimatePresence, motion } from "framer-motion"
+import { FaMagnifyingGlass } from "react-icons/fa6"
+import { MdOutlineEmail } from "react-icons/md"
 
 export default function Layout() {
     const [announcementVisible, setAnnouncementVisible] = useState<boolean>(() => {
@@ -43,16 +45,33 @@ export default function Layout() {
                     )}
                 </AnimatePresence>
             </div>
+
             <nav id="navbar">
                 <div className={styles.contentWrapper}>
                     <Navbar />
                 </div>
             </nav>
+
             <main>
                 <div className={styles.contentWrapper}>
                     <Outlet />
                 </div>
             </main>
+
+            <div className={`${styles.emailContainer}`}>
+                <div className={styles.emailBackground} />
+                <div className={styles.emailBanner}>
+                    <h2>STAY UP TO DATE ABOUT OUR LATEST OFFERS</h2>
+                    <div className={styles.emailInput}>
+                        <div className={styles.searchContainer}>
+                            <MdOutlineEmail className={styles.icon} />
+                            <input type="text" placeholder="Enter your email address" />
+                        </div>
+                        <Button>Subscribe to Newsletter</Button>
+                    </div>
+                </div>
+            </div>
+
             <footer>
                 <div className={styles.contentWrapper}>
                     <Footer />
