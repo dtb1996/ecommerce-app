@@ -38,17 +38,58 @@
             height: 24px;
             stroke-width: 3;
         }
+
+        @media (max-width: 768px) {
+            display: block;
+        }
     }
 
     .companyName {
         font-size: 2rem;
         font-weight: 700;
+
+        @media (max-width: 768px) {
+            margin-right: auto;
+            font-size: 1.575rem;
+        }
     }
 
     .linksLeft {
         display: flex;
         margin-right: auto;
         gap: 24px;
+
+        @media (max-width: 768px) {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            flex-direction: column;
+            background: var(--color-bg-light);
+            width: 100%;
+            max-width: 350px;
+            gap: 0;
+            align-items: center;
+            transform: translateX(-100%);
+            opacity: 0;
+            border-radius: 0 0 20px 0;
+            transition:
+                transform 0.3s ease,
+                opacity 0.3s ease;
+            z-index: 10;
+
+            button,
+            a {
+                display: flex;
+                justify-content: center;
+                padding: 1rem;
+                width: 100%;
+            }
+
+            &.show {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
     }
 
     .searchContainer {
@@ -68,6 +109,28 @@
         input {
             width: 100%;
             padding: 0.75rem 1rem 0.75rem 2.8rem;
+        }
+
+        @media (max-width: 768px) {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 5px;
+            width: 100%;
+            max-width: none;
+            background-color: var(--color-bg-light);
+            box-shadow: var(--shadow-elevation-1);
+            opacity: 0;
+            pointer-events: none;
+            transition:
+                transform 0.3s ease,
+                opacity 0.3s ease;
+
+            &.searchActive {
+                transform: translateY(100%);
+                opacity: 1;
+                pointer-events: all;
+            }
         }
     }
 
@@ -89,6 +152,10 @@
 
         .mobileSearch {
             display: none;
+
+            @media (max-width: 768px) {
+                display: block;
+            }
         }
 
         .cartLink {
@@ -116,62 +183,6 @@
         button {
             background: none;
             border: none;
-        }
-    }
-
-    @media (max-width: 768px) {
-        padding: 1.25rem 1rem;
-        gap: 16px;
-
-        .menuButton {
-            display: block;
-        }
-
-        .companyName {
-            margin-right: auto;
-            font-size: 1.575rem;
-        }
-
-        .linksLeft {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            flex-direction: column;
-            background: var(--color-bg-light);
-            width: 100%;
-            max-width: 350px;
-            gap: 0;
-            align-items: center;
-            transform: translateX(-100%);
-            opacity: 0;
-            border-radius: 0 0 20px 0;
-            transition:
-                transform 0.3s ease,
-                opacity 0.3s ease;
-            z-index: 10;
-
-            button,
-            a {
-                display: flex;
-                justify-content: center;
-                padding: 1rem;
-                width: 100%;
-            }
-        }
-
-        .linksLeft.show {
-            transform: translateX(0);
-            opacity: 1;
-        }
-
-        .searchContainer {
-            display: none;
-        }
-
-        .linksRight {
-            .mobileSearch {
-                display: block;
-            }
         }
     }
 }

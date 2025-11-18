@@ -9,6 +9,10 @@
         align-items: flex-end;
         margin-bottom: 40px;
 
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
+
         h2 {
             font-size: 3rem;
             font-weight: 900;
@@ -37,11 +41,5 @@
         display: flex;
         gap: 20px;
         margin-top: 40px;
-    }
-
-    @media (max-width: 768px) {
-        .heading {
-            flex-direction: column;
-        }
     }
 }

@@ -9,48 +9,55 @@ import { FiMenu, FiX } from "react-icons/fi"
 
 export default function Navbar() {
     const { totalItems } = useCart()
-    const [menuOpen, setMenuOpen] = useState<boolean>(false)
-    const [searchOpen, setSearchOpen] = useState<boolean>(false)
+    const [mobileUiState, setMobileUiState] = useState<"none" | "menu" | "search">("none")
 
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth > 768 && menuOpen) {
-                setMenuOpen(false)
+            if (window.innerWidth > 768 && mobileUiState !== "none") {
+                setMobileUiState("none")
             }
         }
 
         window.addEventListener("resize", handleResize)
         return () => window.removeEventListener("resize", handleResize)
-    }, [menuOpen])
+    }, [mobileUiState])
 
     return (
         <>
             <div className={styles.navContainer}>
                 <button
-                    className={`${styles.menuButton} ${menuOpen ? styles.open : ""}`}
-                    onClick={() => setMenuOpen(!menuOpen)}
+                    className={`${styles.menuButton} ${mobileUiState === "menu" ? styles.open : ""}`}
+                    onClick={() => setMobileUiState((prev) => (prev === "menu" ? "none" : "menu"))}
                     aria-label="Toggle menu"
                 >
-                    {menuOpen ? <FiX /> : <FiMenu />}
+                    {mobileUiState === "menu" ? <FiX /> : <FiMenu />}
                 </button>
 
-                <Link to="/" className={styles.companyName} onClick={() => setMenuOpen(false)}>
+                <Link
+                    to="/"
+                    className={styles.companyName}
+                    onClick={() => setMobileUiState("none")}
+                >
                     RP.SHOP
                 </Link>
 
-                <div className={`${styles.linksLeft} ${menuOpen ? styles.show : ""}`}>
-                    <Link to="/login" onClick={() => setMenuOpen(false)}>
+                <div
+                    className={`${styles.linksLeft} ${mobileUiState === "menu" ? styles.show : ""}`}
+                >
+                    <Link to="/login" onClick={() => setMobileUiState("none")}>
                         Login
                     </Link>
-                    <Link to="/cart" onClick={() => setMenuOpen(false)}>
+                    <Link to="/cart" onClick={() => setMobileUiState("none")}>
                         Cart
                     </Link>
-                    <Link to="/products" onClick={() => setMenuOpen(false)}>
+                    <Link to="/products" onClick={() => setMobileUiState("none")}>
                         Products
                     </Link>
                 </div>
 
-                <div className={styles.searchContainer}>
+                <div
+                    className={`${styles.searchContainer} ${mobileUiState === "search" ? styles.searchActive : ""}`}
+                >
                     <FaMagnifyingGlass className={styles.icon} />
                     <input type="text" placeholder="Search for products..." />
                 </div>
@@ -58,27 +65,30 @@ export default function Navbar() {
                 <div className={styles.linksRight}>
                     <button
                         className={styles.mobileSearch}
-                        onClick={() => {
-                            setMenuOpen(false)
-                            setSearchOpen(!searchOpen)
-                        }}
+                        onClick={() =>
+                            setMobileUiState((prev) => (prev === "search" ? "none" : "search"))
+                        }
                         aria-label="Toggle search bar"
                     >
                         <FaMagnifyingGlass />
                     </button>
-                    <Link to="/cart" className={styles.cartLink} onClick={() => setMenuOpen(false)}>
+                    <Link
+                        to="/cart"
+                        className={styles.cartLink}
+                        onClick={() => setMobileUiState("none")}
+                    >
                         <LuShoppingCart />
                         {totalItems > 0 && <span className={styles.cartCount}>{totalItems}</span>}
                     </Link>
-                    <Link to="/login" onClick={() => setMenuOpen(false)}>
+                    <Link to="/login" onClick={() => setMobileUiState("none")}>
                         <FaRegUserCircle />
                     </Link>
                 </div>
             </div>
 
             <div
-                className={`${styles.backdrop} ${menuOpen ? styles.show : ""}`}
-                onClick={() => setMenuOpen(false)}
+                className={`${styles.backdrop} ${mobileUiState !== "none" ? styles.show : ""}`}
+                onClick={() => setMobileUiState("none")}
             ></div>
         </>
     )
