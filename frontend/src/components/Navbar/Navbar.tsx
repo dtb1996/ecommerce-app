@@ -19,9 +19,23 @@ export default function Navbar() {
     const { allProducts } = useProducts()
     const navigate = useNavigate()
 
+    const resetSearch = () => {
+        setSearchTerm("")
+        setSearchResults([])
+        setShowResults(false)
+    }
+
+    useEffect(() => {
+        if (mobileUiState !== "search") {
+            resetSearch()
+        }
+    }, [mobileUiState])
+
+    // Reset mobileUIState and search on resize
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth > 768 && mobileUiState !== "none") {
+                resetSearch()
                 setMobileUiState("none")
             }
         }
@@ -30,6 +44,7 @@ export default function Navbar() {
         return () => window.removeEventListener("resize", handleResize)
     }, [mobileUiState])
 
+    // Search handling
     useEffect(() => {
         if (!searchTerm.trim()) {
             setSearchResults([])
@@ -86,14 +101,42 @@ export default function Navbar() {
                 <div
                     className={`${styles.searchContainer} ${mobileUiState === "search" ? styles.searchActive : ""}`}
                 >
-                    <FaMagnifyingGlass className={styles.icon} />
-                    <input
-                        type="text"
-                        placeholder="Search for products..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        onFocus={() => searchTerm && setShowResults(true)}
-                    />
+                    <div className={styles.searchBar}>
+                        <FaMagnifyingGlass className={styles.icon} />
+                        <input
+                            type="text"
+                            placeholder="Search for products..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onFocus={() => searchTerm && setShowResults(true)}
+                        />
+                    </div>
+
+                    {showResults && (
+                        <div className={styles.resultsContainer}>
+                            <div className={styles.searchResults}>
+                                {searchResults.length === 0 ? (
+                                    <div className={styles.noResults}>No results found</div>
+                                ) : (
+                                    searchResults.slice(0, 6).map((product) => (
+                                        <button
+                                            key={product.id}
+                                            className={styles.resultItem}
+                                            onClick={() => {
+                                                navigate(`/products/${product.id}`)
+                                                setMobileUiState("none")
+                                                setShowResults(false)
+                                                setSearchTerm("")
+                                            }}
+                                        >
+                                            <img src={product.image_url} alt={product.name} />
+                                            <span>{product.name}</span>
+                                        </button>
+                                    ))
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 <div className={styles.linksRight}>
@@ -119,30 +162,6 @@ export default function Navbar() {
                     </Link>
                 </div>
             </div>
-
-            {showResults && (
-                <div className={styles.searchResults}>
-                    {searchResults.length === 0 ? (
-                        <div className={styles.noResults}>No results found</div>
-                    ) : (
-                        searchResults.slice(0, 6).map((product) => (
-                            <button
-                                key={product.id}
-                                className={styles.resultItem}
-                                onClick={() => {
-                                    navigate(`/products/${product.id}`)
-                                    setMobileUiState("none")
-                                    setShowResults(false)
-                                    setSearchTerm("")
-                                }}
-                            >
-                                <img src={product.image_url} alt={product.name} />
-                                <span>{product.name}</span>
-                            </button>
-                        ))
-                    )}
-                </div>
-            )}
 
             <div
                 className={`${styles.backdrop} ${mobileUiState !== "none" ? styles.show : ""}`}
