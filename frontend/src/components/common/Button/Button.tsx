@@ -4,7 +4,7 @@ import styles from "./Button.module.scss"
 type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
     children: React.ReactNode
     onClick?: () => void
-    disabled?: bool
+    disabled?: boolean
     variant?: string
     className?: string
 }
