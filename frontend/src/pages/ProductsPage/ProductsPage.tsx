@@ -8,7 +8,6 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa6"
 import { useProducts } from "@/hooks/useProducts"
 import { useResponsiveProducts } from "@/hooks/useResponsiveProducts"
 import { getVisiblePages } from "@/utils/pagination"
-import Navbar from "@/components/Navbar/Navbar"
 
 export default function ProductsPage() {
     const {
