@@ -1,0 +1,35 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 5px;
+    width: 100%;
+    max-width: 570px;
+    gap: 16px;
+
+    background: none;
+    color: var(--color-text);
+    border-radius: 0;
+    text-align: left;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        font-size: 1.125rem;
+        width: 100%;
+    }
+
+    .chevron {
+        display: flex;
+        padding: 4px 8px;
+        color: var(--color-text);
+
+        &.active {
+            transform: scaleY(-1);
+        }
+    }
+
+    .answer {
+        color: var(--color-text-muted);
+    }
+}
