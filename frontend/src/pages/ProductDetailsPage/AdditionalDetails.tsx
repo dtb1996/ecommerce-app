@@ -60,3 +60,5 @@ export const AdditionalDetails: React.FC<Props> = ({ product }) => {
         </div>
     )
 }
+
+export default AdditionalDetails
