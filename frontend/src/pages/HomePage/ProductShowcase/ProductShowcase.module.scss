@@ -8,12 +8,21 @@
         font-size: 3rem;
         font-weight: 900;
         text-transform: uppercase;
+
+        @media (max-width: 768px) {
+            margin: 50px 0 32px;
+            font-size: 2rem;
+        }
     }
 
     .productsRow {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 1.25rem;
+
+        @media (max-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 
     button {
@@ -22,36 +31,12 @@
         background-color: transparent;
         color: var(--color-text);
         border: 1px solid var(--color-bg-dark);
-    }
 
-    .divider {
-        margin-top: 64px;
-        width: 100%;
-        height: 1px;
-        background-color: var(--color-bg-dark);
-    }
-}
-
-@media (max-width: 768px) {
-    .showcase {
-        h2 {
-            margin: 50px 0 32px;
-            font-size: 2rem;
-        }
-
-        .productsRow {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        button {
+        @media (max-width: 768px) {
             margin: 24px 16px 0;
             padding: 13.5px 80px;
             width: 100%;
             max-width: 358px;
-        }
-
-        .divider {
-            margin: 40px 100px 0;
         }
     }
 }

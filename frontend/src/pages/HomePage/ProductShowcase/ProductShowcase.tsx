@@ -2,8 +2,15 @@ import { useProducts } from "@/hooks/useProducts"
 import styles from "./ProductShowcase.module.scss"
 import { ProductCard } from "@/components/ProductCard/ProductCard"
 import { Button } from "@/components/common/Button/Button"
+import type { Product } from "@/types/Product"
 
-export default function ProductShowcase() {
+type Props = {
+    title: string
+    products: Product[]
+    showViewAllButton?: boolean
+}
+
+export const ProductShowcase: React.FC<Props> = ({ title, products, showViewAllButton = true }) => {
     const { allProducts } = useProducts()
 
     const newProducts = allProducts.slice(0, 4)
@@ -11,21 +18,15 @@ export default function ProductShowcase() {
 
     return (
         <div className={styles.showcase}>
-            <h2>New Arrivals</h2>
+            <h2>{title}</h2>
             <div className={styles.productsRow}>
-                {newProducts.map((product) => (
+                {products.map((product) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>
-            <Button onClick={() => {}}>View All</Button>
-            <div className={styles.divider} />
-            <h2>Top Selling</h2>
-            <div className={styles.productsRow}>
-                {topProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                ))}
-            </div>
-            <Button onClick={() => {}}>View All</Button>
+            {showViewAllButton && <Button onClick={() => {}}>View All</Button>}
         </div>
     )
 }
+
+export default ProductShowcase
