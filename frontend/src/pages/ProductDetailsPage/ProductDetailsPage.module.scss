@@ -55,7 +55,7 @@
                 border-radius: 20px;
 
                 &.selected {
-                    border: 1px solid var(--color-text);
+                    border: 2px solid var(--color-text);
                 }
             }
 
@@ -77,7 +77,7 @@
             @media (max-width: 768px) {
                 margin: auto;
                 flex-direction: column-reverse;
-                max-width: 358px;
+                width: 100%;
                 height: auto;
             }
         }
@@ -195,6 +195,7 @@
                 }
 
                 @media (max-width: 768px) {
+                    flex-wrap: wrap;
                     gap: 8px;
                 }
             }
@@ -219,6 +220,7 @@
             }
 
             @media (max-width: 768px) {
+                flex-wrap: wrap;
                 gap: 12px;
             }
         }
