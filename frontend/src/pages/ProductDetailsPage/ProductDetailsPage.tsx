@@ -17,6 +17,7 @@ const sizes = ["small", "medium", "large", "x-large"]
 export default function ProductDetailsPage() {
     const { id } = useParams()
     const [product, setProduct] = useState<Product | null>(null)
+    const [activeImage, setActiveImage] = useState<number>(0)
     const [activeColor, setActiveColor] = useState(colors[0] || null)
     const [activeSize, setActiveSize] = useState(sizes[0] || null)
     const { addToCart } = useCart()
@@ -46,20 +47,40 @@ export default function ProductDetailsPage() {
     return product ? (
         <div className={styles.page}>
             <section className={styles.details}>
-                <div className={styles.imageSelector}>
-                    <img src={product.image_url ?? placeholder} alt={product.name} />
-                    <img src={product.image_url ?? placeholder} alt={product.name} />
-                    <img src={product.image_url ?? placeholder} alt={product.name} />
+                <div className={styles.imageSection}>
+                    <div className={styles.imageSelector}>
+                        <Button onClick={() => setActiveImage(0)}>
+                            <img
+                                className={`${activeImage === 0 ? styles.selected : ""}`}
+                                src={product.image_url ?? placeholder}
+                                alt={product.name}
+                            />
+                        </Button>
+                        <Button onClick={() => setActiveImage(1)}>
+                            <img
+                                className={`${activeImage === 1 ? styles.selected : ""}`}
+                                src={product.image_url ?? placeholder}
+                                alt={product.name}
+                            />
+                        </Button>
+                        <Button onClick={() => setActiveImage(2)}>
+                            <img
+                                className={`${activeImage === 2 ? styles.selected : ""}`}
+                                src={product.image_url ?? placeholder}
+                                alt={product.name}
+                            />
+                        </Button>
+                    </div>
+
+                    <img
+                        className={styles.mainImage}
+                        src={product.image_url ?? placeholder}
+                        alt={product.name}
+                    />
                 </div>
 
-                <img
-                    className={styles.mainImage}
-                    src={product.image_url ?? placeholder}
-                    alt={product.name}
-                />
-
                 <div className={styles.info}>
-                    <h2>{product.name}</h2>
+                    <h2 className={styles.productName}>{product.name}</h2>
 
                     <h4 className={styles.price}>${product.price.toFixed(2)}</h4>
 
@@ -84,7 +105,7 @@ export default function ProductDetailsPage() {
                     </div>
 
                     <div className={`${styles.sizeSelector} ${styles.borderBottom}`}>
-                        <h4>Select Color</h4>
+                        <h4>Choose Size</h4>
                         <div className={styles.sizes}>
                             {sizes.map((size) => (
                                 <Button
