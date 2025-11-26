@@ -65,7 +65,11 @@ export default function Layout() {
                     <div className={styles.emailInput}>
                         <div className={styles.searchContainer}>
                             <MdOutlineEmail className={styles.icon} />
-                            <input type="text" placeholder="Enter your email address" />
+                            <input
+                                id="email input box"
+                                type="text"
+                                placeholder="Enter your email address"
+                            />
                         </div>
                         <Button>Subscribe to Newsletter</Button>
                     </div>

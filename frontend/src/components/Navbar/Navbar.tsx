@@ -104,6 +104,7 @@ export default function Navbar() {
                     <div className={styles.searchBar}>
                         <FaMagnifyingGlass className={styles.icon} />
                         <input
+                            id="product search"
                             type="text"
                             placeholder="Search for products..."
                             value={searchTerm}
