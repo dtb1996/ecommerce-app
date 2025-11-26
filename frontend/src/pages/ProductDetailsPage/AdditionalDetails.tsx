@@ -6,6 +6,7 @@ import { ReviewCard } from "@/components/ReviewCard/ReviewCard"
 import { companyReviews } from "@/utils/demoReviews"
 import { productFaqs } from "@/utils/demoFaqs"
 import FaqCard from "./FaqCard"
+import { LuListFilter } from "react-icons/lu"
 
 type Props = {
     product: Product
@@ -42,8 +43,12 @@ export const AdditionalDetails: React.FC<Props> = ({ product }) => {
                     <div className={styles.tabHeader}>
                         <h4>All Reviews</h4>
                         <p className={styles.reviewCount}>(451)</p>
-                        <Button onClick={() => {}}>icon</Button>
-                        <Button onClick={() => {}}>Latest</Button>
+                        <Button className={styles.filtersButton} onClick={() => {}}>
+                            <LuListFilter />
+                        </Button>
+                        <Button className={styles.latestButton} onClick={() => {}}>
+                            Latest
+                        </Button>
                         <Button onClick={() => {}}>Write a Review</Button>
                     </div>
 

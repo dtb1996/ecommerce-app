@@ -8,6 +8,8 @@ import QuantitySelector from "@/components/common/QuantitySelector/QuantitySelec
 import { Button } from "@/components/common/Button/Button"
 import { useCart } from "@/context/CartContext"
 import AdditionalDetails from "./AdditionalDetails"
+import ProductShowcase from "../HomePage/ProductShowcase/ProductShowcase"
+import { useProducts } from "@/hooks/useProducts"
 
 const colors = ["#4f4631", "#314f4a", "#31344f"]
 const sizes = ["small", "medium", "large", "x-large"]
@@ -18,6 +20,10 @@ export default function ProductDetailsPage() {
     const [activeColor, setActiveColor] = useState(colors[0] || null)
     const [activeSize, setActiveSize] = useState(sizes[0] || null)
     const { addToCart } = useCart()
+
+    // Demo similar products
+    const { allProducts } = useProducts()
+    const similarProducts = allProducts.slice(0, 4)
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -106,6 +112,14 @@ export default function ProductDetailsPage() {
 
             <section className={styles.additionalDetails}>
                 <AdditionalDetails product={product} />
+            </section>
+
+            <section className={styles.similarItems}>
+                <ProductShowcase
+                    title="You Might Also Like"
+                    products={similarProducts}
+                    showViewAllButton={false}
+                />
             </section>
         </div>
     ) : (

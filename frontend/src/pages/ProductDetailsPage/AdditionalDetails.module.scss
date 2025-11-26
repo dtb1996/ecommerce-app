@@ -48,6 +48,26 @@
             color: var(--color-text-muted);
         }
 
+        .filtersButton,
+        .latestButton {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+        }
+
+        .filtersButton {
+            padding: 14px 13px;
+            aspect-ratio: 1 / 1;
+
+            svg {
+                font-size: 18.75px;
+                stroke-width: 3;
+            }
+        }
+
+        button {
+            height: 48px;
+        }
+
         .reviewsGrid {
             display: grid;
             grid-template-columns: 1fr 1fr;
