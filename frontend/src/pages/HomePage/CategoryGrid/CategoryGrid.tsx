@@ -26,6 +26,14 @@ export default function CategoryGrid() {
                     <h4 className={styles.cardText}>Gym</h4>
                 </div>
             </div>
+            <a
+                className={styles.attribution}
+                href="https://www.freepik.com"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Images Designed by Freepik
+            </a>
         </div>
     )
 }
