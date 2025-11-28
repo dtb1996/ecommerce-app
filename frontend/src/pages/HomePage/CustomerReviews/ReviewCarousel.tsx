@@ -1,30 +1,26 @@
 import type { Review } from "@/types/Review"
 import styles from "./ReviewCarousel.module.scss"
 import { ReviewCard } from "@/components/ReviewCard/ReviewCard"
+import { forwardRef } from "react"
 
 type Props = {
     reviews: Review[]
 }
 
-export const ReviewCarousel: React.FC<Props> = ({ reviews }) => {
-    // const extended = [...reviews, ...reviews.slice(0, visibleCount)]
-
+export const ReviewCarousel = forwardRef<HTMLDivElement, Props>(({ reviews }, ref) => {
     return (
-        // <div className={styles.viewport}>
         <div
             className={styles.track}
-            // style={{
-            //     transform: `translateX(${translateX}%)`,
-            //     width: `${(extended.length * 100) / visibleCount}%`,
-            // }}
+            ref={(node) => {
+                if (typeof ref === "function") ref(node)
+                else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node
+            }}
         >
             {reviews.map((review, i) => (
-                // <div key={i} className={styles.slide} style={{ width: `${slideWidth}%` }}>
                 <div key={i} className={styles.item}>
                     <ReviewCard review={review} />
                 </div>
             ))}
         </div>
-        // </div>
     )
-}
+})

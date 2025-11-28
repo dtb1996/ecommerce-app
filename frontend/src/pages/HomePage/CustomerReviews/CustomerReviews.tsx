@@ -3,16 +3,34 @@ import { Button } from "@/components/common/Button/Button"
 import styles from "./CustomerReviews.module.scss"
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6"
 import { ReviewCarousel } from "./ReviewCarousel"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { companyReviews } from "@/utils/demoReviews"
+import carouselStyles from "./ReviewCarousel.module.scss"
 
 export const CustomerReviews: React.FC = () => {
-    const [currentIndex, setCurrentIndex] = useState(0)
+    const trackRef = useRef<HTMLDivElement>(null)
 
-    const handleNext = () => setCurrentIndex((prev) => (prev + 1) % companyReviews.length)
+    const scrollAmount = () => {
+        const track = trackRef.current
+        if (!track) return 0
 
-    const handlePrev = () =>
-        setCurrentIndex((prev) => (prev - 1 + companyReviews.length) % companyReviews.length)
+        // Detect mobile (item width = 100%)
+        const firstItem = track.querySelector<HTMLElement>(`.${carouselStyles.item}`)
+
+        return firstItem?.offsetWidth ?? 0
+    }
+
+    const handleNext = () => {
+        const track = trackRef.current
+        if (!track) return
+        track.scrollLeft += scrollAmount()
+    }
+
+    const handlePrev = () => {
+        const track = trackRef.current
+        if (!track) return
+        track.scrollLeft -= scrollAmount()
+    }
 
     return (
         <div className={styles.customerReviews}>
@@ -27,7 +45,7 @@ export const CustomerReviews: React.FC = () => {
                     </Button>
                 </div>
             </div>
-            <ReviewCarousel reviews={companyReviews} />
+            <ReviewCarousel ref={trackRef} reviews={companyReviews} />
         </div>
     )
 }
