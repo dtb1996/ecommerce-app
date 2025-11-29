@@ -82,3 +82,106 @@ export const companyReviews: Review[] = [
         type: "company",
     },
 ]
+
+export const productReviews: Review[] = [
+    {
+        id: "101",
+        author: "Liam Parker",
+        rating: 5,
+        content:
+            "This product exceeded my expectations! High quality and works exactly as described. Definitely worth every penny.",
+        type: "product",
+        productId: "prod-001",
+        date: "2025-03-15",
+    },
+    {
+        id: "102",
+        author: "Emma Wallace",
+        rating: 4,
+        content:
+            "Very good product overall. I had a small issue with assembly, but customer support helped me resolve it quickly.",
+        type: "product",
+        productId: "prod-002",
+        date: "2025-07-02",
+    },
+    {
+        id: "103",
+        author: "Noah Kim",
+        rating: 3,
+        content:
+            "The product is okay, but not as durable as I expected. It works fine, but I hoped for better build quality.",
+        type: "product",
+        productId: "prod-003",
+        date: "2025-01-28",
+    },
+    {
+        id: "104",
+        author: "Olivia Grant",
+        rating: 5,
+        content:
+            "Absolutely love it! The design is sleek, and it performs perfectly. Would buy again without hesitation.",
+        type: "product",
+        productId: "prod-001",
+        date: "2025-11-10",
+    },
+    {
+        id: "105",
+        author: "Ethan Ross",
+        rating: 4,
+        content:
+            "Works well and arrived quickly. Packaging could be a bit better, but overall very satisfied with the purchase.",
+        type: "product",
+        productId: "prod-004",
+        date: "2025-05-21",
+    },
+    {
+        id: "106",
+        author: "Ava Brooks",
+        rating: 5,
+        content:
+            "Fantastic product! Easy to use and high quality. I’ve recommended it to all my friends.",
+        type: "product",
+        productId: "prod-002",
+        date: "2025-09-08",
+    },
+    {
+        id: "107",
+        author: "James Liu",
+        rating: 2,
+        content:
+            "Not what I expected. The product works, but it feels cheap and the instructions were confusing.",
+        type: "product",
+        productId: "prod-003",
+        date: "2025-06-12",
+    },
+    {
+        id: "108",
+        author: "Sophia Hernandez",
+        rating: 5,
+        content:
+            "Amazing quality! The product looks and feels premium, and it performs flawlessly. Highly recommended.",
+        type: "product",
+        productId: "prod-004",
+        date: "2025-08-30",
+    },
+    {
+        id: "109",
+        author: "Mason Clark",
+        rating: 4,
+        content:
+            "Good product, exactly as described. Shipping took a little longer than expected, but worth the wait.",
+        type: "product",
+        productId: "prod-001",
+        date: "2025-04-17",
+    },
+    {
+        id: "110",
+        author: "Isabella Reed",
+        rating: 5,
+        content:
+            "Superb product! Works perfectly and feels very durable. Customer service was also very helpful with my questions.",
+        type: "product",
+        productId: "prod-002",
+        date: "2025-10-05",
+    },
+]

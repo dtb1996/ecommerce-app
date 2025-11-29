@@ -3,6 +3,14 @@ import styles from "./ReviewCard.module.scss"
 
 export const ReviewCard: React.FC<{ review: Review }> = ({ review }) => {
     const { author, rating, content } = review
+    const formattedDate: string =
+        review.type === "product" && review.date
+            ? new Date(review.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+              })
+            : ""
 
     const formatName = (fullName: string) => {
         const parts = fullName.trim().split(" ")
@@ -22,8 +30,9 @@ export const ReviewCard: React.FC<{ review: Review }> = ({ review }) => {
                     </span>
                 ))}
             </div>
-            <h4>{formatName(author)}</h4>
-            <p>{content}</p>
+            <h4 className={styles.author}>{formatName(author)}</h4>
+            <p className={styles.content}>{content}</p>
+            {review.type === "product" && <p className={styles.date}>Posted on {formattedDate}</p>}
         </div>
     )
 }

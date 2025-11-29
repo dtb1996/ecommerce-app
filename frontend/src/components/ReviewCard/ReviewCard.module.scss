@@ -13,20 +13,34 @@
         .starEmpty {
             color: #d3d3d3;
         }
+
+        @media (max-width: 768px) {
+            font-size: 1.25rem;
+        }
     }
 
-    h4 {
+    .author {
         margin-top: 15px;
         font-size: 1.25rem;
         line-height: 22px;
+
+        @media (max-width: 768px) {
+            font-size: 1rem;
+        }
     }
 
     p {
+        color: var(--color-text-muted);
+
+        @media (max-width: 768px) {
+            font-size: 0.875rem;
+        }
+    }
+
+    .content {
         margin-top: 12px;
         max-width: 336px;
-        height: 110px;
         line-height: 22px;
-        color: var(--color-text-muted);
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 5;
@@ -44,5 +58,14 @@
         @media (max-width: 768px) {
             max-width: 100%;
         }
+    }
+
+    .date {
+        margin-top: 24px;
+        font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+        padding: 24px;
     }
 }

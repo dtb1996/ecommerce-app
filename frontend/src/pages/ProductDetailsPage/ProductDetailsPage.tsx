@@ -132,7 +132,7 @@ export default function ProductDetailsPage() {
             </section>
 
             <section className={styles.additionalDetails}>
-                <AdditionalDetails product={product} />
+                <AdditionalDetails />
             </section>
 
             <section className={styles.similarItems}>

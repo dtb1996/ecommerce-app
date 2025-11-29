@@ -1,18 +1,13 @@
 import { Button } from "@/components/common/Button/Button"
 import styles from "./AdditionalDetails.module.scss"
 import { useState } from "react"
-import type { Product } from "@/types/Product"
 import { ReviewCard } from "@/components/ReviewCard/ReviewCard"
-import { companyReviews } from "@/utils/demoReviews"
+import { productReviews } from "@/utils/demoReviews"
 import { productFaqs } from "@/utils/demoFaqs"
 import FaqCard from "./FaqCard"
 import { LuListFilter } from "react-icons/lu"
 
-type Props = {
-    product: Product
-}
-
-export const AdditionalDetails: React.FC<Props> = ({ product }) => {
+export const AdditionalDetails = () => {
     const [activeTab, setActiveTab] = useState<"details" | "reviews" | "faqs">("details")
 
     return (
@@ -42,7 +37,7 @@ export const AdditionalDetails: React.FC<Props> = ({ product }) => {
                 <div className={styles.reviewTab}>
                     <div className={styles.tabHeader}>
                         <h4>All Reviews</h4>
-                        <p className={styles.reviewCount}>(451)</p>
+                        <p className={styles.reviewCount}>({productReviews.length})</p>
                         <Button className={styles.filtersButton} onClick={() => {}}>
                             <LuListFilter />
                         </Button>
@@ -53,7 +48,7 @@ export const AdditionalDetails: React.FC<Props> = ({ product }) => {
                     </div>
 
                     <div className={styles.reviewsGrid}>
-                        {companyReviews.slice(0, 6).map((review, i) => (
+                        {productReviews.slice(0, 6).map((review, i) => (
                             <div key={i} className={styles.item}>
                                 <ReviewCard review={review} />
                             </div>

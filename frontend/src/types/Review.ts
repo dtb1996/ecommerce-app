@@ -5,4 +5,5 @@ export interface Review {
     content: string
     type: "company" | "product"
     productId?: string // only used if type === "product"
+    date?: string // only used if type === "product"
 }
