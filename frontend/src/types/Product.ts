@@ -3,7 +3,7 @@ export interface Product {
     name: string
     description: string
     price: number
-    image_url: string
+    images: string[]
     category: string
     in_stock: boolean
 }

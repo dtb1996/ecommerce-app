@@ -37,6 +37,9 @@ export default function ProductDetailsPage() {
             if (error) {
                 console.error("Error fetching product:", error)
             } else {
+                if (!data.images || !data.images.length) {
+                    data.images = [placeholder, placeholder, placeholder]
+                }
                 setProduct(data)
             }
         }
@@ -49,32 +52,20 @@ export default function ProductDetailsPage() {
             <section className={styles.details}>
                 <div className={styles.imageSection}>
                     <div className={styles.imageSelector}>
-                        <Button onClick={() => setActiveImage(0)}>
-                            <img
-                                className={`${activeImage === 0 ? styles.selected : ""}`}
-                                src={product.image_url ?? placeholder}
-                                alt={product.name}
-                            />
-                        </Button>
-                        <Button onClick={() => setActiveImage(1)}>
-                            <img
-                                className={`${activeImage === 1 ? styles.selected : ""}`}
-                                src={product.image_url ?? placeholder}
-                                alt={product.name}
-                            />
-                        </Button>
-                        <Button onClick={() => setActiveImage(2)}>
-                            <img
-                                className={`${activeImage === 2 ? styles.selected : ""}`}
-                                src={product.image_url ?? placeholder}
-                                alt={product.name}
-                            />
-                        </Button>
+                        {product.images.map((img, index) => (
+                            <Button key={index} onClick={() => setActiveImage(index)}>
+                                <img
+                                    className={activeImage === index ? styles.selected : ""}
+                                    src={img ?? placeholder}
+                                    alt={`${product.name} ${index + 1}`}
+                                />
+                            </Button>
+                        ))}
                     </div>
 
                     <img
                         className={styles.mainImage}
-                        src={product.image_url ?? placeholder}
+                        src={product.images[activeImage] ?? placeholder}
                         alt={product.name}
                     />
                 </div>

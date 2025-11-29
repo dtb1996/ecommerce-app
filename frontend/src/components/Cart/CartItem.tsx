@@ -12,7 +12,7 @@ export const CartItem: React.FC<{ item: Product; quantity: number }> = ({ item, 
     return (
         <div className={styles.item}>
             <Link to={`/products/${item.id}`} className={styles.link}>
-                <img src={item.image_url ?? placeholder} alt={item.name} />
+                <img src={item.images[0] ?? placeholder} alt={item.name} />
                 <div className={styles.info}>
                     <h3>{item.name}</h3>
                     <p>{item.description}</p>

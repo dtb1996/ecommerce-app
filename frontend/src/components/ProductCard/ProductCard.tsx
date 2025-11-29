@@ -7,7 +7,7 @@ export const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     return (
         <Link to={`/products/${product.id}`} className={styles.card}>
             <div className={styles.imageWrapper}>
-                <img src={product.image_url ?? placeholder} alt={product.name} />
+                <img src={product.images[0] ?? placeholder} alt={product.name} />
             </div>
             <h3 className={styles.name}>{product.name}</h3>
             <p className={styles.price}>${product.price.toFixed(2)}</p>

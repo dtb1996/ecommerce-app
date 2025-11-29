@@ -15,7 +15,12 @@ const categories = [
 
 const BASE_URL = process.env.VITE_API_URL ?? "http://localhost:5000"
 
-const getImageUrl = (keyword: string) => `${BASE_URL}/api/image/${encodeURIComponent(keyword)}`
+// Generates 3 distinct image URLs that hit your backend proxy
+function generateImages(keyword: string): string[] {
+    return Array.from({ length: 3 }).map(
+        (_, i) => `${BASE_URL}/api/image/${encodeURIComponent(keyword)}?sig=${i}`
+    )
+}
 
 function generateProduct() {
     const category = faker.helpers.arrayElement(categories)
@@ -23,7 +28,7 @@ function generateProduct() {
     const name = faker.commerce.productName()
     const description = faker.commerce.productDescription()
     const price = parseFloat(faker.commerce.price({ min: 10, max: 300, dec: 2 }))
-    const image_url = getImageUrl(keyword)
+    const images = generateImages(keyword)
     const in_stock = faker.datatype.boolean(0.8)
 
     return {
@@ -31,7 +36,7 @@ function generateProduct() {
         description,
         price,
         category: category.name,
-        image_url,
+        images,
         in_stock,
     }
 }
@@ -55,7 +60,7 @@ async function seedProducts() {
         process.exit(0)
     }
 
-    const products = Array.from({ length: PRODUCT_COUNT }, generateProduct)
+    const products = Array.from({ length: PRODUCT_COUNT }).map(() => generateProduct())
 
     const { error } = await supabase.from("products").insert(products)
 

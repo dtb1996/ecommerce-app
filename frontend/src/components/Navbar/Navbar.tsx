@@ -130,7 +130,7 @@ export default function Navbar() {
                                                 setSearchTerm("")
                                             }}
                                         >
-                                            <img src={product.image_url} alt={product.name} />
+                                            <img src={product.images[0]} alt={product.name} />
                                             <span>{product.name}</span>
                                         </button>
                                     ))

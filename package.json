@@ -4,6 +4,7 @@
     "dev:secrets": "concurrently \"npm run dev:secrets --prefix backend\" \"npm run dev:secrets --prefix frontend\""
   },
   "devDependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "node-fetch": "^3.3.2"
   }
 }
