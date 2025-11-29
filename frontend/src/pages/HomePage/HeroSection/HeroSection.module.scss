@@ -1,117 +1,154 @@
 .hero {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    background-color: var(--color-bg);
     background-image:
-        linear-gradient(to right, var(--color-bg), transparent),
+        linear-gradient(to right, white, transparent),
         url("@assets/images/sitting-on-top-of-rock.jpg");
     background-size: 120% auto;
     background-position: -20% center;
     background-repeat: no-repeat;
 
-    .heroText {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        margin: 103px 40px 80px 100px;
-        max-width: 596px;
+    @media (max-width: 1200px) {
+        background-position: right 150% bottom 60%;
+    }
 
-        h1 {
-            max-width: 577px;
-            font-size: 3.5rem;
-            line-height: 4rem;
-            text-transform: uppercase;
+    @media (max-width: 850px) {
+        background-position: right 150% bottom;
+    }
+
+    @media (max-width: 768px) {
+        background-image:
+            linear-gradient(white, transparent), url("@assets/images/sitting-on-top-of-rock.jpg");
+        background-position: left 100% bottom;
+    }
+}
+
+.heroText {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 103px 40px 80px 100px;
+    max-width: 596px;
+
+    h1 {
+        max-width: 577px;
+        font-size: 3.5rem;
+        line-height: 4rem;
+        text-transform: uppercase;
+
+        @media (max-width: 768px) {
+            max-width: fit-content;
+            font-size: 2.25rem;
+            line-height: 2.125rem;
+        }
+    }
+
+    p {
+        color: var(--color-text-muted);
+
+        @media (max-width: 768px) {
+            font-size: 0.875rem;
+        }
+    }
+
+    button {
+        width: 210px;
+
+        @media (max-width: 768px) {
+            width: 100%;
+            max-width: 358px;
+        }
+    }
+
+    @media (max-width: 1000px) {
+        margin: 60px 16px;
+    }
+
+    @media (max-width: 768px) {
+        margin: 40px 16px 0;
+        gap: 1.25rem;
+        align-items: center;
+        width: 100%;
+        max-width: fit-content;
+        text-align: center;
+    }
+}
+
+.metrics {
+    display: flex;
+    margin-top: 1rem;
+
+    > *:not(:first-child):not(:last-child) {
+        padding: 0px 32px;
+
+        @media (max-width: 768px) {
+            padding: 0px 27.5px;
+        }
+
+        @media (max-width: 475px) {
+            padding: 0;
+        }
+    }
+
+    > *:not(:last-child) {
+        padding-right: 32px;
+        border-right: 1px solid var(--color-border);
+
+        @media (max-width: 768px) {
+            padding-right: 27.5px;
+        }
+
+        @media (max-width: 475px) {
+            border: none;
+            padding: 0;
+        }
+    }
+
+    > *:not(:first-child) {
+        padding-left: 32px;
+
+        @media (max-width: 768px) {
+            padding-left: 27.5px;
+        }
+
+        @media (max-width: 475px) {
+            padding: 0;
+        }
+    }
+
+    .metric {
+        h3 {
+            font-size: 2.5rem;
+
+            @media (max-width: 768px) {
+                font-size: 1.5rem;
+            }
         }
 
         p {
             color: var(--color-text-muted);
-        }
 
-        button {
-            width: 210px;
-        }
-
-        .metrics {
-            display: flex;
-            margin-top: 1rem;
-
-            > *:not(:first-child):not(:last-child) {
-                padding: 0px 32px;
-            }
-
-            > *:not(:last-child) {
-                padding-right: 32px;
-                border-right: 1px solid var(--color-border);
-            }
-
-            > *:not(:first-child) {
-                padding-left: 32px;
-            }
-
-            .metric {
-                h3 {
-                    font-size: 2.5rem;
-                }
-
-                p {
-                    color: var(--color-text-muted);
-                }
+            @media (max-width: 768px) {
+                font-size: 0.75rem;
             }
         }
     }
-}
 
-@media (max-width: 768px) {
-    .hero {
-        .heroText {
-            margin: 40px 16px 0;
-            gap: 1.25rem;
-            align-items: center;
-            width: 100%;
+    @media (max-width: 768px) {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 0;
+        margin-bottom: 448px;
+    }
 
-            h1 {
-                max-width: fit-content;
-                font-size: 2.25rem;
-                line-height: 2.125rem;
-            }
+    @media (max-width: 600px) {
+        margin-bottom: 350px;
+    }
 
-            p {
-                font-size: 0.875rem;
-            }
+    @media (max-width: 550px) {
+        gap: 27.5px;
+    }
 
-            button {
-                width: 100%;
-                max-width: 358px;
-            }
-
-            .metrics {
-                flex-wrap: wrap;
-                justify-content: center;
-                margin-top: 0;
-
-                > *:not(:first-child):not(:last-child) {
-                    padding: 0px 27.5px;
-                }
-
-                > *:not(:last-child) {
-                    padding-right: 27.5px;
-                }
-
-                > *:not(:first-child) {
-                    padding-left: 27.5px;
-                }
-
-                .metric {
-                    h3 {
-                        font-size: 1.5rem;
-                    }
-
-                    p {
-                        font-size: 0.75rem;
-                    }
-                }
-            }
-        }
+    @media (max-width: 400px) {
+        margin-bottom: 250px;
     }
 }
