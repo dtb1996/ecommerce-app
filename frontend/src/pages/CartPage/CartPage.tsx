@@ -8,13 +8,7 @@ import { LuTag } from "react-icons/lu"
 import { FaArrowRight } from "react-icons/fa6"
 
 export default function CartPage() {
-    const { cartItems, clearCart, totalPrice } = useCart()
-
-    const handleClearCart = () => {
-        if (window.confirm("This will remove all items from your cart. Continue?")) {
-            clearCart()
-        }
-    }
+    const { cartItems, totalPrice } = useCart()
 
     return (
         <div className={styles.cart}>

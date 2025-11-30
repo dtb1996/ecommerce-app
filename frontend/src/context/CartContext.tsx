@@ -1,5 +1,5 @@
 import type { Product } from "@/types/Product"
-import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react"
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
 
 type CartItem = Product & { quantity: number }
 
