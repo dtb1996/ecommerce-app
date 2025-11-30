@@ -6,8 +6,20 @@ type AuthContextType = {
     user: User | null
     session: Session | null
     loading: boolean
-    signUp: (email: string, password: string) => Promise<void>
-    signIn: (email: string, password: string) => Promise<void>
+    signUp: (
+        email: string,
+        password: string
+    ) => Promise<{
+        data: { user: User | null; session: Session | null }
+        error: AuthError | null
+    }>
+    signIn: (
+        email: string,
+        password: string
+    ) => Promise<{
+        data: { user: User | null; session: Session | null }
+        error: AuthError | null
+    }>
     signOut: () => Promise<void>
 }
 

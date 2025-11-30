@@ -14,5 +14,6 @@
             "@utils/*": ["./src/utils/*"],
             "@api/*": ["./src/api/*"]
         }
-    }
+    },
+    "exclude": ["scripts", "**/*.test.ts", "**/*.spec.ts"]
 }

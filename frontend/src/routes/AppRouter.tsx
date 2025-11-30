@@ -2,7 +2,6 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { lazy, Suspense } from "react"
 import Layout from "@/components/Layout/Layout"
 import ProtectedRoute from "./ProtectedRoute"
-import { CheckoutProvider } from "@/context/CheckoutContext"
 
 const HomePage = lazy(() => import("@/pages/HomePage/HomePage"))
 const LoginPage = lazy(() => import("@/pages/LoginPage/LoginPage"))

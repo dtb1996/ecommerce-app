@@ -10,7 +10,8 @@
         "build": "tsc",
         "start": "node dist/index.js",
         "lint": "eslint .",
-        "lint:fix": "eslint . --fix"
+        "lint:fix": "eslint . --fix",
+        "seed": "tsx src/scripts/seedProducts.ts"
     },
     "keywords": [],
     "author": "",
