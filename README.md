@@ -1,6 +1,6 @@
 # E-Commerce Storefront
 
-A modern, full-stack-ready **React + TypeScript** storefront application built for scalability and maintainability. It includes a modular component system, SCSS styling, and environment variable management using both **local `.env` files** and **Infisical** for secure, cloud-stored secrets.
+A full-stack **React + TypeScript** storefront application built for scalability and maintainability. It includes a modular component system, SCSS styling, and environment variable management using both **local `.env` files** and **Infisical** for secure, cloud-stored secrets.
 
 ## Features
 
