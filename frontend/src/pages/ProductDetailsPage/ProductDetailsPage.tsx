@@ -20,6 +20,7 @@ export default function ProductDetailsPage() {
     const [activeImage, setActiveImage] = useState<number>(0)
     const [activeColor, setActiveColor] = useState(colors[0] || null)
     const [activeSize, setActiveSize] = useState(sizes[0] || null)
+    const [quantityToAdd, setQuantityToAdd] = useState<number>(1)
     const { addToCart } = useCart()
 
     // Demo similar products
@@ -112,10 +113,13 @@ export default function ProductDetailsPage() {
                     </div>
 
                     <div className={styles.cartButtons}>
-                        <QuantitySelector quantity={1} />
+                        <QuantitySelector
+                            quantity={quantityToAdd}
+                            onQuantityChanged={(value) => setQuantityToAdd(value)}
+                        />
                         <Button
                             className={styles.addToCartButton}
-                            onClick={() => addToCart(product, 1)}
+                            onClick={() => addToCart(product, quantityToAdd)}
                             children={"Add to Cart"}
                         />
                     </div>
