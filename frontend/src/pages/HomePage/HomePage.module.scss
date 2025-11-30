@@ -1,6 +1,11 @@
 .home {
     margin-top: -32px;
 
+    .heroSection,
+    .brandStrip {
+        margin: 0 -16px;
+    }
+
     .productShowcase {
         margin-top: 8px;
     }

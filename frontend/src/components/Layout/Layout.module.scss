@@ -41,26 +41,51 @@
             svg {
                 font-size: 1.125rem;
             }
+
+            @media (max-width: 768px) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            font-size: 0.75rem;
+
+            button {
+                display: none;
+            }
         }
     }
 
     .contentWrapper {
         width: 100%;
         max-width: 1440px;
-        // margin: 0 auto;
         justify-self: center;
+
+        @media (max-width: 768px) {
+            padding: 0;
+        }
+    }
+
+    .navbar {
+        margin: 0 auto;
+        justify-self: center;
+        width: 100%;
+        background-color: var(--color-bg-light);
     }
 
     nav {
         position: sticky;
         top: 0;
-        // padding: 0 1rem;
         z-index: 50;
+
+        @media (max-width: 768px) {
+            padding: 0;
+        }
     }
 
     main {
         flex: 1;
-        padding: 1.25rem 0 5rem;
+        padding: 1.25rem 1rem 5rem;
     }
 
     .emailContainer {
@@ -169,27 +194,5 @@
         padding: 0 1rem 0.5rem;
         z-index: 45;
         background-color: var(--color-bg-footer);
-    }
-
-    @media (max-width: 768px) {
-        .announcementBanner {
-            font-size: 0.75rem;
-
-            button {
-                display: none;
-            }
-        }
-
-        .contentWrapper {
-            padding: 0;
-        }
-
-        nav {
-            padding: 0;
-        }
-
-        main {
-            padding: 1.25rem 0 5rem;
-        }
     }
 }

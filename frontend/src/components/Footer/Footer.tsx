@@ -1,4 +1,3 @@
-import { Button } from "../common/Button/Button"
 import styles from "./Footer.module.scss"
 import { FaFacebookF, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa"
 

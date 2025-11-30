@@ -6,7 +6,6 @@ import { useEffect, useState } from "react"
 import { Button } from "../common/Button/Button"
 import { IoClose } from "react-icons/io5"
 import { AnimatePresence, motion } from "framer-motion"
-import { FaMagnifyingGlass } from "react-icons/fa6"
 import { MdOutlineEmail } from "react-icons/md"
 
 export default function Layout() {
@@ -46,10 +45,8 @@ export default function Layout() {
                 </AnimatePresence>
             </div>
 
-            <nav id="navbar">
-                <div className={styles.contentWrapper}>
-                    <Navbar />
-                </div>
+            <nav id="navbar" className={styles.navbar}>
+                <Navbar />
             </nav>
 
             <main>
