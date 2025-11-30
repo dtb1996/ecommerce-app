@@ -24,7 +24,7 @@ export default function Footer() {
                         <a href="#">
                             <FaInstagram />
                         </a>
-                        <a href="#">
+                        <a href="https://github.com/dtb1996/ecommerce-app">
                             <FaGithub />
                         </a>
                     </div>
