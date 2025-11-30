@@ -21,8 +21,12 @@
             align-items: center;
             margin-bottom: 1rem;
 
-            h3 {
+            h2 {
                 font-size: 2rem;
+
+                @media (max-width: 768px) {
+                    font-size: 1.75rem;
+                }
             }
 
             p {

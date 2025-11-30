@@ -14,9 +14,9 @@ export const CartItem: React.FC<{ item: Product; quantity: number }> = ({ item, 
             <Link to={`/products/${item.id}`} className={styles.link}>
                 <img src={item.images[0] ?? placeholder} alt={item.name} />
                 <div className={styles.info}>
-                    <h3>{item.name}</h3>
-                    <p>{item.description}</p>
-                    <p>${item.price.toFixed(2)}</p>
+                    <h3 className={styles.name}>{item.name}</h3>
+                    <p className={styles.description}>{item.description}</p>
+                    <p className={styles.price}>${item.price.toFixed(2)}</p>
                 </div>
             </Link>
             <div className={styles.controls}>

@@ -103,7 +103,7 @@ export default function ProductsPage() {
 
             <section className={styles.productsArea}>
                 <div className={styles.pageInfo}>
-                    <h3>{selectedCategory ? selectedCategory : "All Products"}</h3>
+                    <h2>{selectedCategory ? selectedCategory : "All Products"}</h2>
 
                     <p>{`Showing ${currentPageProductsRange} of ${filteredProducts.length} Product${filteredProducts.length === 1 ? "" : "s"}`}</p>
 

@@ -132,6 +132,11 @@
                 font-size: 2rem;
                 line-height: 35px;
             }
+
+            @media (max-width: 400px) {
+                font-size: 1.5rem;
+                line-height: 35px;
+            }
         }
 
         @media (max-width: 960px) {
