@@ -1,6 +1,6 @@
 import express from "express"
 import Stripe from "stripe"
-import { STRIPE_SECRET_KEY, FRONTEND_URL } from "../env.ts"
+import { STRIPE_SECRET_KEY, FRONTEND_URL } from "../env"
 
 const router = express.Router()
 

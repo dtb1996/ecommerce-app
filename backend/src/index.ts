@@ -1,9 +1,9 @@
-import { FRONTEND_URL, PORT } from "./env.ts"
+import { FRONTEND_URL, PORT } from "./env"
 import cors from "cors"
 import express from "express"
-import paymentRoutes from "./routes/payment.ts"
-import imageProxy from "./routes/imageProxy.ts"
-import userRoutes from "./routes/user.ts"
+import paymentRoutes from "./routes/payment"
+import imageProxy from "./routes/imageProxy"
+import userRoutes from "./routes/user"
 
 const app = express()
 
