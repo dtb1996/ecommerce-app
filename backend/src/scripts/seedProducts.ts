@@ -1,8 +1,26 @@
 import "dotenv/config"
 import { faker } from "@faker-js/faker"
-import { supabase } from "../api/supabaseServerClient.ts"
+import { createClient } from "@supabase/supabase-js"
 
+// === CONFIG ===
 const PRODUCT_COUNT = 25
+const SEED_ENV = process.env.SEED_ENV ?? "development"
+const TABLE_NAME = SEED_ENV === "production" ? "products_prod" : "products_dev"
+
+// Supabase client using service key
+const supabaseUrl = process.env.SUPABASE_URL ?? ""
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY ?? ""
+
+if (!supabaseUrl || !supabaseServiceKey) {
+    throw new Error("Missing Supabase environment variables")
+}
+
+const supabase = createClient(supabaseUrl, supabaseServiceKey)
+
+// Backend URLs for images (production can point to deployed backend, dev uses placeholder)
+const LOCAL_BACKEND_URL = process.env.BACKEND_URL_LOCAL ?? "https://via.placeholder.com/400"
+const PROD_BACKEND_URL = process.env.BACKEND_URL_PROD ?? ""
+const BASE_URL = SEED_ENV === "production" ? PROD_BACKEND_URL : LOCAL_BACKEND_URL
 
 const categories = [
     { name: "Tech", keywords: ["laptop", "headphones", "smartphone", "keyboard", "monitor"] },
@@ -13,63 +31,65 @@ const categories = [
     { name: "Accessories", keywords: ["watch", "ring", "necklace", "bracelet", "sunglasses"] },
 ]
 
-const BASE_URL = process.env.VITE_API_URL ?? "http://localhost:5000"
-
 // Generates 3 distinct image URLs that hit your backend proxy
 function generateImages(keyword: string): string[] {
-    return Array.from({ length: 3 }).map(
-        (_, i) => `${BASE_URL}/api/image/${encodeURIComponent(keyword)}?sig=${i}`
-    )
+    return Array.from({ length: 3 }).map((_, i) => {
+        if (SEED_ENV === "production") {
+            return `${BASE_URL}/api/image/${encodeURIComponent(keyword)}?sig=${i}`
+        }
+        // Local dev placeholder images
+        return `${BASE_URL}?text=${encodeURIComponent(keyword)}+${i}`
+    })
 }
 
 function generateProduct() {
     const category = faker.helpers.arrayElement(categories)
     const keyword = faker.helpers.arrayElement(category.keywords)
-    const name = faker.commerce.productName()
-    const description = faker.commerce.productDescription()
-    const price = parseFloat(faker.commerce.price({ min: 10, max: 300, dec: 2 }))
-    const images = generateImages(keyword)
-    const in_stock = faker.datatype.boolean(0.8)
-
     return {
-        name,
-        description,
-        price,
+        name: faker.commerce.productName(),
+        description: faker.commerce.productDescription(),
+        price: parseFloat(faker.commerce.price({ min: 10, max: 300, dec: 2 })),
         category: category.name,
-        images,
-        in_stock,
+        images: generateImages(keyword),
+        in_stock: faker.datatype.boolean(0.8),
     }
 }
 
 async function seedProducts() {
-    console.log(`\nStarting product seed (${PRODUCT_COUNT} items)...`)
+    console.log(`\nSeeding ${PRODUCT_COUNT} products into table "${TABLE_NAME}"...`)
 
-    // Prevent duplicate seeding
+    // Check if table already has products
     const { data: existing, error: fetchError } = await supabase
-        .from("products")
+        .from(TABLE_NAME)
         .select("id")
         .limit(1)
 
     if (fetchError) {
-        console.error("Error checking existing products:", fetchError.message)
+        console.error(`Error checking existing products in ${TABLE_NAME}:`, fetchError.message)
         process.exit(1)
     }
 
     if (existing && existing.length > 0) {
-        console.log("Products already exist — skipping seeding.")
-        process.exit(0)
+        console.log(`Products already exist in "${TABLE_NAME}" — skipping seeding.`)
+        return
     }
 
-    const products = Array.from({ length: PRODUCT_COUNT }).map(() => generateProduct())
-
-    const { error } = await supabase.from("products").insert(products)
-
-    if (error) {
-        console.error("Error inserting products:", error.message)
+    // Clear table first
+    const { error: deleteError } = await supabase.from(TABLE_NAME).delete().neq("id", 0)
+    if (deleteError) {
+        console.error(`Error clearing ${TABLE_NAME}:`, deleteError.message)
         process.exit(1)
     }
 
-    console.log(`Successfully seeded ${PRODUCT_COUNT} products.`)
+    const products = Array.from({ length: PRODUCT_COUNT }).map(generateProduct)
+    const { error: insertError } = await supabase.from(TABLE_NAME).insert(products)
+
+    if (insertError) {
+        console.error(`Error inserting products into ${TABLE_NAME}:`, insertError.message)
+        process.exit(1)
+    }
+
+    console.log(`Successfully seeded ${PRODUCT_COUNT} products into "${TABLE_NAME}".`)
 }
 
 seedProducts().catch((err) => {

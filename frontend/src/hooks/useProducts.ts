@@ -2,6 +2,8 @@ import { supabase } from "@/api/supabaseClient"
 import type { Product } from "@/types/Product"
 import { useEffect, useState } from "react"
 
+const TABLE_NAME = import.meta.env.VITE_PRODUCTS_TABLE ?? "products_dev"
+
 export function useProducts() {
     const [allProducts, setAllProducts] = useState<Product[]>([])
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
@@ -12,7 +14,7 @@ export function useProducts() {
 
     useEffect(() => {
         async function fetchProducts() {
-            const { data, error } = await supabase.from("products").select()
+            const { data, error } = await supabase.from(TABLE_NAME).select()
 
             if (error) {
                 console.error(error)

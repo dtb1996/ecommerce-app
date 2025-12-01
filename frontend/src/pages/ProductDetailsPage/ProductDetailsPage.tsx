@@ -11,6 +11,8 @@ import AdditionalDetails from "./AdditionalDetails"
 import ProductShowcase from "../HomePage/ProductShowcase/ProductShowcase"
 import { useProducts } from "@/hooks/useProducts"
 
+const TABLE_NAME = import.meta.env.VITE_PRODUCTS_TABLE ?? "products_dev"
+
 const colors = ["#4f4631", "#314f4a", "#31344f"]
 const sizes = ["small", "medium", "large", "x-large"]
 
@@ -30,7 +32,7 @@ export default function ProductDetailsPage() {
     useEffect(() => {
         const fetchProduct = async () => {
             const { data, error } = await supabase
-                .from("products")
+                .from(TABLE_NAME)
                 .select("*")
                 .eq("id", id)
                 .single()
