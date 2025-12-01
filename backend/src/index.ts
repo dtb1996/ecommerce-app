@@ -1,9 +1,9 @@
-import { FRONTEND_URL, PORT } from "./env.js"
+import { FRONTEND_URL, PORT } from "./env"
 import cors from "cors"
 import express from "express"
-import paymentRoutes from "./routes/payment.js"
-import imageProxy from "./routes/imageProxy.js"
-import userRoutes from "./routes/user.js"
+import paymentRoutes from "./routes/payment"
+import imageProxy from "./routes/imageProxy"
+import userRoutes from "./routes/user"
 
 const app = express()
 
