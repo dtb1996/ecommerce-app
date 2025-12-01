@@ -9,7 +9,7 @@ const app = express()
 
 app.use(
     cors({
-        origin: FRONTEND_URL,
+        origin: "*", // FRONTEND_URL,
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         credentials: true,
     }),
