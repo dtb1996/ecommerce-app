@@ -1,39 +1,144 @@
-# E-Commerce Storefront
+# E-Commerce Storefront (Full-Stack)
 
-A full-stack **React + TypeScript** storefront application built for scalability and maintainability. It includes a modular component system, SCSS styling, and environment variable management using both **local `.env` files** and **Infisical** for secure, cloud-stored secrets.
+A full-stack **React + TypeScript + Node.js/Express** ecommerce storefront application built for scalability and maintainability.
+Includes:
+
+- Frontend hosted on **Netlify**
+- Cloud-hosted backend on **Render**
+- Database, storage, and authentication handled with **Supabase**
+- Secure environment management using **Infisical** or `.env` files
+- Image proxying for protected Supabase buckets
 
 ## Features
 
-- **React 18 + TypeScript:** strict typing and component safety
-- **SCSS Modules:** locally scoped, themeable styles
-- **Modular UI components:** reusable `Button`, `QuantitySelector`, and layout primitives
-- **Environment Config with Infisical:** secure, centralized secret management
+### Frontend
+
+- **React 18 + TypeScript**
+- **SCSS Modules** for localized styling
+- **Reusable components:** (`Button`, `ProductCard`, etc.)
+- **Responsive grid & mobile filters**
+- **React Context** for cart and UI state
+- **Pagination, sorting, filtering**
 - **Vite Dev Server:** fast builds and hot module reloading
+
+### Backend (Node.js + Express)
+
+- REST API hosted on **Render**
+- Supabase service role integration for secure DB access
+- Routes:
+  - /api/payment → Stripe checkout
+  - /api/user → auth profile helpers
+  - /api/image → Supabase image proxy (private bucket support)
+- CORS locked to Netlify URL
+
+### Database
+
+- **Supabase** with two tables:
+  - products_dev for local dev
+  - products_prod for production
+- Automatic environment-based table selection
+
+## Demo / Screenshots
+
+### Live Demo
+
+[https://dillon-ecommerce-app.netlify.app/](https://dillon-ecommerce-app.netlify.app/)
+
+### Home Page
+
+![Home Page Screenshot](docs/screenshots/home-page.png)
+
+### Login Page
+
+![Login Page Screenshot](docs/screenshots/login-page.png)
+
+### Cart Page
+
+![Cart Page Screenshot](docs/screenshots/cart-page.png)
+
+### Products Page
+
+![Products Page Screenshot](docs/screenshots/products-page.png)
+
+### Product Details Page
+
+![Product Details Page Screenshot](docs/screenshots/product-details-page.png)
 
 ## Project Structure
 
 ```bash
 ecommerce-storefront/
 │
-├── src/
-│   ├── components/ # Reusable UI components
-│   ├── pages/      # Page-level views
-│   ├── hooks/      # Custom React hooks
-│   ├── assets/     # Images, fonts, and icons
-│   ├── styles/     # Global and SCSS module files
-│   └── main.tsx    # App entry point
+├── frontend/
+│   ├── src/
+│   │   ├── assets/     # Images, fonts, and icons
+│   │   ├── components/ # Reusable UI components
+│   │   ├── context/    # Global React contexts (cart, UI state, providers)
+│   │   ├── hooks/      # Custom React hooks
+│   │   ├── pages/      # Page-level views
+│   │   ├── routes/     # Centralized route definitions / React Router config
+│   │   ├── scripts/    # One-off utilities like seeders or data migration helpers
+│   │   ├── styles/     # Global and SCSS module files
+│   │   ├── types/      # Shared TypeScript interfaces and type definitions
+│   │   ├── utils/      # Helper functions (demo reviews, pagination, etc.)
+│   │   └── main.tsx    # Frontend app entry point
+│   │
+│   ├── public/         # Static assets
+│   ├── index.html
+│   ├── .env            # Local development environment variables
+│   ├── .env.example    # Example variable names
+│   ├── infisical.json  # Optional: Infisical project configuration
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── vite.config.ts
 │
-├── .env            # Local development environment variables
-├── .env.example    # Example variable names
-├── infisical.json  # Optional: Infisical project configuration
-├── package.json
-├── tsconfig.json
-└── vite.config.ts
+├── backend/
+│   ├── src/
+│   │   ├── api/        # Supabase helper
+│   │   ├── routes/     # Express route handlers (images, payment, user)
+│   │   ├── scripts/    # Server-side utilities like seeders or infisical checks
+│   │   ├── env.ts      # Typed environment variable loader & validator
+│   │   └── index.ts    # Main Express server entry point
+│   │
+│   ├── .env            # Local development environment variables
+│   ├── .env.example    # Example variable names
+│   ├── infisical.json  # Optional: Infisical project configuration
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── package.json        # Project-level config
+└── README.md
 ```
 
 ## Environment Setup
 
-You can configure environment variables in two ways — locally or via Infisical Cloud Secrets.
+### Frontend (frontend/.env)
+
+```bash
+VITE_SUPABASE_URL=<supabase-url-here>
+VITE_SUPABASE_KEY=<supabase-auth-key-here>
+SUPABASE_SERVICE_KEY=<supabase-service-key-here>
+VITE_API_URL=<backend-api-url-here>
+VITE_PRODUCTS_TABLE=products_dev    # "products_prod" or "products_dev"
+```
+
+**Note:** Only variables prefixed with `VITE_` are exposed to your frontend when using Vite.
+
+### Frontend (frontend/.env)
+
+```bash
+STRIPE_SECRET_KEY=<stripe-secret-key-here>
+PORT=<port-number-here>
+FRONTEND_URL=<frontend-url-here>
+UNSPLASH_ACCESS_KEY=<unsplash-access-key-here>
+SUPABASE_URL=<supabase_url_here>
+SUPABASE_SERVICE_KEY=<supabase_service_key_here
+BACKEND_URL_LOCAL=http://localhost:<port-number-here>
+BACKEND_URL_PROD=<production-backend-url-here>
+SEED_ENV=production   # "production" or "development"
+```
+
+You can configure environment variables in two ways: locally or via Infisical Cloud Secrets.
 
 ### Option 1: Local `.env` File
 
@@ -49,9 +154,8 @@ Edit `.env`:
 VITE_SUPABASE_URL=<supabase-url-here>
 VITE_SUPABASE_KEY=<supabase-auth-key-here>
 SUPABASE_SERVICE_KEY=<supabase-service-key-here>
+...
 ```
-
-**Note:** Only variables prefixed with `VITE_` are exposed to your frontend when using Vite.
 
 ### Option 2: Using Infisical
 
@@ -90,6 +194,8 @@ infisical run --env=prod -- npm run build
 
 ## Development
 
+### Frontend
+
 Run the local dev server:
 
 ```bash
@@ -115,37 +221,86 @@ Preview production build locally:
 npm run preview
 ```
 
-## Common Issues
+### Backend
 
-**1. Missing `.env` variables**  
-Ensure `.env` or Infisical keys are available before running `npm run dev`.
-
-**2. TypeScript error for custom components**  
-Make sure component prop types extend native HTML attributes, for example:
-
-```ts
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: string;
-};
+```bash
+cd backend
+npm install
+npm run dev
 ```
 
-**3. Styles not applying**  
-Check that SCSS modules are imported correctly:
+**Note:** the frontend and backend can be run from the base project directory with:
 
-```ts
-import styles from "./Button.module.scss";
+```bash
+npm run dev
 ```
+
+## Deployment
+
+### Frontend → Netlify
+
+- Connect GitHub repo
+- Set build command: `npm run build`
+- Publish directory: `dist`
+- Add frontend env vars (`VITE_*`)
+- Set backend URL to your Render deployment:
+
+```bash
+VITE_BACKEND_URL=https://your-backend.onrender.com
+```
+
+### Backend → Render
+
+- Deploy as **Web Service**
+- Build command: `npm install && npm run build`
+- Start command: `node dist/index.js`
+- Add environment variables:
+
+```bash
+FRONTEND_URL=https://your-netlify-site.netlify.app
+NODE_ENV=production
+```
+
+Make sure CORS is correct:
+
+```bash
+cors({
+  origin: FRONTEND_URL,
+  credentials: true
+})
+```
+
+## Image Handling
+
+Images are stored in **Supabase Storage (private)** and accessed via backend proxy: `GET /api/image/:path`
+
+Frontend never talks to Supabase Storage directly in production.
 
 ## Tech Stack
 
-- **Front End:** [React](https://react.dev/), [React Router](https://reactrouter.com/), [TypeScript](https://www.typescriptlang.org/)
-- **Styling:** [SCSS Modules](https://sass-lang.com/), CSS Variables
-- **State Management:** React Context API for cart and UI state
-- **API / Backend:** [Supabase](https://supabase.com/) for database and authentication
-- **Utilities:** [Faker](https://fakerjs.dev/) for seeding mock data, [clsx](https://github.com/lukeed/clsx) for className management
-- **Linting & Formatting:** [ESLint](https://eslint.org/), [Prettier](https://prettier.io/)
-- **CI/CD:** [GitHub Actions](https://github.com/features/actions), [Netlify](https://www.netlify.com/) for hosting
-- **Image Handling:** [Unsplash](https://unsplash.com/) or [LoremFlickr](https://loremflickr.com/) for placeholder images
+### Frontend
+
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vite.dev/)
+- [SCSS Modules](https://sass-lang.com/), CSS Variables
+- [React Router](https://reactrouter.com/)
+- [Netlify hosting](https://www.netlify.com/)
+
+### Backend
+
+- [Node.js](https://nodejs.org/en), [Express](https://expressjs.com/)
+- [Supabase](https://supabase.com/) for DB, Storage, and Authentication
+- [Stripe Payments](https://stripe.com/)
+- [Render hosting](https://render.com/)
+
+### Tools
+
+- [ESLint](https://eslint.org/), [Prettier](https://prettier.io/)
+- [Infisical](https://infisical.com/) for secrets
+- [Faker](https://fakerjs.dev/) for seeding mock data
+- [clsx](https://github.com/lukeed/clsx) for className management
+- [Unsplash](https://unsplash.com/) for placeholder images
 
 ## Credits
 
