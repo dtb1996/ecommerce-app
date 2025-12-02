@@ -10,8 +10,7 @@ export default function Footer() {
                 <div className={styles.brandColumn}>
                     <h2 className={styles.logo}>RP.SHOP</h2>
                     <p className={styles.description}>
-                        We have clothes that suit your style and which you’re proud to wear. From
-                        women to men.
+                        We have clothes that suit your style and that you’re proud to wear.
                     </p>
                     <div className={styles.socials}>
                         <a href="#">
