@@ -13,6 +13,10 @@ export function useProducts() {
     const [selectedPriceRange, setSelectedPriceRange] = useState<[number, number]>([0, 300])
 
     useEffect(() => {
+        console.log("Filtered products:", filteredProducts)
+    }, [filteredProducts])
+
+    useEffect(() => {
         async function fetchProducts() {
             const { data, error } = await supabase.from(TABLE_NAME).select()
 
